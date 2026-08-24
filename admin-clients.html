@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CM Technologies | Client Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+:root{--navy:#07385d;--navy2:#0a456f;--blue:#0b83c6;--blue2:#0874af;--bg:#f4f8fb;--ice:#eef6fa;--ink:#142430;--muted:#687985;--line:#dbe8ee;--green:#1f9d73;--red:#b94444;--white:#fff;--shadow:0 10px 30px rgba(7,56,93,.055)}
+*{box-sizing:border-box}html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}body{margin:0;width:100%;max-width:100%;overflow-x:hidden;font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--ink)}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation}
+header{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:30;box-shadow:0 5px 20px rgba(7,56,93,.025)}
+.brand{display:flex;align-items:center;gap:11px}.mark{width:43px;height:43px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;font:800 .88rem Manrope}.brand strong{display:block;font:800 .92rem Manrope;color:var(--navy)}.brand small{display:block;color:#80939e;font-size:.57rem;text-transform:uppercase;letter-spacing:.1em;margin-top:2px}.header-actions{display:flex;gap:8px}.top-link{min-height:40px;border:1px solid var(--line);border-radius:7px;padding:0 12px;display:flex;align-items:center;gap:8px;color:var(--navy);font-size:.75rem;font-weight:800;background:#fff}.top-link:hover{background:#f8fbfd}
+main{padding:30px;width:min(1450px,100%);margin:auto}.eyebrow{color:var(--blue);font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em}h1{font:800 clamp(2rem,4vw,2.65rem)/1 Manrope;color:var(--navy);letter-spacing:-.05em;margin:7px 0 8px}.sub{color:var(--muted);margin:0;line-height:1.6;font-size:.9rem}.page-head{margin-bottom:22px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}.stat:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#dcebf2}.stat:nth-child(2):after{background:#a8d7eb}.stat:nth-child(3):after{background:#83cbb2}.stat:nth-child(4):after{background:#e9c785}.stat-head{display:flex;justify-content:space-between;align-items:center}.stat span{font-size:.7rem;color:var(--muted);font-weight:700}.stat-icon{width:34px;height:34px;border-radius:8px;background:#edf7fb;color:var(--blue)!important;display:grid;place-items:center}.stat strong{display:block;font:800 1.4rem Manrope;color:var(--navy);margin-top:6px}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}.ph{padding:16px 18px;border-bottom:1px solid var(--line);font:800 .9rem Manrope;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:10px}.ph i{color:var(--blue)}.clients{max-height:72vh;overflow:auto}.client-search{padding:12px;border-bottom:1px solid var(--line);position:relative}.client-search i{position:absolute;left:25px;top:50%;transform:translateY(-50%);color:#8ca0ab;font-size:.78rem}.client-search input{width:100%;padding-left:36px}.client{padding:14px 16px;border-bottom:1px solid #edf2f5;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.15s}.client:hover,.client.active{background:var(--ice)}.client-avatar{width:37px;height:37px;border-radius:50%;background:#e7f4fb;color:var(--navy);display:grid;place-items:center;font:800 .68rem Manrope;flex:none}.client-info{min-width:0}.client strong{display:block;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.client small{display:block;color:var(--muted);font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.body{padding:18px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:12px}.tab{border:1px solid var(--line);border-radius:7px;background:#fff;padding:9px 11px;font-size:.72rem;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:7px}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}.view{display:none}.view.active{display:block}.section-title{font:800 .92rem Manrope;color:var(--navy);margin:0 0 13px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:18px;background:#f8fbfc;border:1px solid #e4edf2;border-radius:9px;padding:15px}label{display:grid;gap:6px;font-size:.7rem;font-weight:800;color:#536773}input,select,textarea{border:1px solid #cfdee6;border-radius:7px;padding:10px 11px;font-size:16px;min-height:44px;background:#fff;outline:0;width:100%}input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,131,198,.08)}textarea{min-height:95px;resize:vertical}.full{grid-column:1/-1}.btn{border:0;border-radius:7px;background:var(--blue);color:#fff;padding:10px 13px;font-size:.72rem;font-weight:800;min-height:40px}.btn:hover{background:var(--blue2)}.danger{background:#fff0f0;color:var(--red);border:1px solid #f0cccc}.danger:hover{background:#fbe5e5}
+.table-wrap{overflow:auto;width:100%;border:1px solid var(--line);border-radius:8px}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:12px;border-bottom:1px solid #edf2f5;text-align:left;font-size:.76rem}th{font-size:.61rem;text-transform:uppercase;letter-spacing:.05em;color:#71838e;background:#f8fbfc}tbody tr:hover{background:#fbfdfe}.status-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f4fb;color:#0878b4;font-size:.62rem;font-weight:800;text-transform:capitalize}.progress-wrap{display:flex;align-items:center;gap:8px}.progress-track{width:75px;height:6px;border-radius:999px;background:#e5edf1;overflow:hidden}.progress-bar{height:100%;background:var(--blue);border-radius:999px}
+.message-list{display:grid;gap:8px;margin-bottom:15px;max-height:390px;overflow:auto}.message{max-width:78%;padding:10px 12px;border-radius:4px 11px 11px 11px;background:var(--ice);font-size:.78rem;line-height:1.5}.message.admin{margin-left:auto;background:#dff2fb;border-radius:11px 4px 11px 11px}.message strong{display:block;font-size:.65rem;color:var(--navy);margin-bottom:3px}.empty{padding:30px;text-align:center;color:var(--muted);font-size:.8rem}.error-banner{display:none;background:#fff2f2;border:1px solid #eccccc;border-left:4px solid var(--red);border-radius:8px;padding:12px 14px;color:#8b3636;font-size:.78rem;margin-bottom:16px}.error-banner.show{display:block}
+@media(max-width:1000px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:290px minmax(0,1fr)}}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.clients{max-height:280px}.form{grid-template-columns:1fr}.full{grid-column:auto}}
+@media(max-width:650px){header{height:66px;padding:0 13px}.brand small{display:none}.top-link span{display:none}.top-link{width:40px;padding:0;justify-content:center}.header-actions .top-link:last-child{display:none}main{padding:20px 11px}.stats{gap:8px}.stat{padding:13px}.body{padding:13px}.tabs{flex-wrap:nowrap;overflow:auto;padding-bottom:10px}.tab{white-space:nowrap}.form{padding:12px}.message{max-width:90%}}
+@media(max-width:390px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+  <header>
+<a class="brand" href="admin.html"><span class="mark">CM</span><span><strong>CM Technologies</strong><small>Admin Workspace</small></span></a>
+<div class="header-actions">
+<a class="top-link" href="admin.html"><i class="fa-solid fa-chart-pie"></i><span>Main Admin</span></a>
+<a class="top-link" href="admin-requests.html"><i class="fa-regular fa-clipboard"></i><span>Project Requests</span></a>
+<a class="top-link" href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Website</span></a>
+</div>
+</header>
+  <main>
+<div class="page-head"><div class="eyebrow">Admin workspace</div><h1>Clients & Projects</h1><p class="sub">Manage customer accounts, project delivery, milestones, invoices, files and messages.</p></div>
+<div class="stats">
+<div class="stat"><div class="stat-head"><span>Client accounts</span><span class="stat-icon"><i class="fa-solid fa-users"></i></span></div><strong id="sClients">0</strong></div>
+<div class="stat"><div class="stat-head"><span>Selected projects</span><span class="stat-icon"><i class="fa-solid fa-diagram-project"></i></span></div><strong id="sProjects">0</strong></div>
+<div class="stat"><div class="stat-head"><span>Active projects</span><span class="stat-icon"><i class="fa-solid fa-chart-line"></i></span></div><strong id="sActive">0</strong></div>
+<div class="stat"><div class="stat-head"><span>Average progress</span><span class="stat-icon"><i class="fa-solid fa-percent"></i></span></div><strong id="sProgress">0%</strong></div>
+</div>
+<div class="error-banner" id="loadError"></div>
+<div class="grid">
+      <section class="panel">
+        <div class="ph"><span><i class="fa-solid fa-users"></i>&nbsp; Client accounts</span><span id="clientCount">0</span></div>
+<div class="client-search"><i class="fa-solid fa-magnifying-glass"></i><input id="clientSearch" placeholder="Search clients..."></div>
+<div class="clients" id="clients"><div class="empty">Loading clients...</div></div>
+      </section>
+      <section class="panel">
+        <div class="ph" id="selectedTitle"><span><i class="fa-regular fa-user"></i>&nbsp; Select a client</span></div>
+        <div class="body" id="workspace">
+          <div class="empty"><i class="fa-regular fa-hand-pointer" style="font-size:1.4rem;color:var(--blue)"></i><br><br>Choose a client account to manage their work.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+const sb=supabase.createClient('https://qwcnownpgjzaeuqaulvz.supabase.co','sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w');
+let clients=[],selected=null,projects=[];
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const money=n=>'R '+Number(n||0).toLocaleString('en-ZA',{minimumFractionDigits:2});
+const setError=m=>{const e=$('#loadError');e.textContent=m||'';e.classList.toggle('show',!!m)};
+const initials=n=>String(n||'Client').trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('');
+
+async function guard(){
+ const{data:{session},error}=await sb.auth.getSession();
+ if(error||!session){location.replace('admin-login.html');return false}
+ const check=await sb.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
+ if(check.error){setError('Admin access check failed: '+check.error.message);return false}
+ if(!check.data){location.replace('admin-login.html');return false}
+ return true
+}
+async function loadClients(){
+ setError('');
+ $('#clients').innerHTML='<div class="empty"><i class="fa-solid fa-circle-notch fa-spin"></i><br><br>Loading client accounts...</div>';
+
+ // Primary source: secure admin RPC. This includes Auth users even if an older
+ // account was created before client_profiles existed.
+ let result=await sb.rpc('admin_list_clients');
+
+ // Fallback for installations where the repair SQL has not yet been run.
+ if(result.error){
+   console.warn('admin_list_clients RPC unavailable, falling back to client_profiles:',result.error);
+   result=await sb.from('client_profiles').select('*').order('created_at',{ascending:false});
+ }
+
+ if(result.error){
+   clients=[];
+   $('#sClients').textContent='0';
+   $('#clientCount').textContent='0';
+   $('#clients').innerHTML='<div class="empty">Client accounts could not be loaded.</div>';
+   setError('Could not load clients: '+result.error.message+' — Run CM-Technologies-CLIENT-DATA-REPAIR.sql in Supabase.');
+   return;
+ }
+
+ clients=Array.isArray(result.data)?result.data:[];
+ $('#sClients').textContent=clients.length;
+ renderClients();
+}
+function renderClients(){
+ const q=($('#clientSearch')?.value||'').toLowerCase();
+ const list=clients.filter(c=>[c.full_name,c.business,c.email,c.phone].join(' ').toLowerCase().includes(q));
+ $('#clientCount').textContent=list.length;
+ $('#clients').innerHTML=list.map(c=>`<div class="client ${selected?.user_id===c.user_id?'active':''}" onclick="selectClient('${c.user_id}')">
+ <span class="client-avatar">${esc(initials(c.full_name))}</span><span class="client-info"><strong>${esc(c.full_name||'Unnamed client')}</strong><small>${esc(c.business||c.email||'Individual client')}</small></span></div>`).join('')||'<div class="empty">No client accounts found.</div>'
+}
+$('#clientSearch').oninput=renderClients;
+
+window.selectClient=async id=>{
+ selected=clients.find(c=>c.user_id===id);if(!selected)return;
+ renderClients();$('#selectedTitle').innerHTML=`<span><i class="fa-regular fa-user"></i>&nbsp; ${esc(selected.full_name||'Client')} · Workspace</span>`;
+ await renderWorkspace()
+};
+function projectOptions(){return projects.map(p=>`<option value="${p.id}">${esc(p.title)}</option>`).join('')}
+function updateProjectStats(){
+ $('#sProjects').textContent=projects.length;
+ $('#sActive').textContent=projects.filter(p=>!['completed','cancelled'].includes(p.status)).length;
+ $('#sProgress').textContent=(projects.length?Math.round(projects.reduce((a,p)=>a+Number(p.progress||0),0)/projects.length):0)+'%'
+}
+async function renderWorkspace(){
+ if(!selected)return;
+ setError('');
+ let[p,ms,inv,fl,msg]=await Promise.all([
+  sb.from('client_projects').select('*').eq('client_id',selected.user_id).order('created_at',{ascending:false}),
+  sb.from('project_milestones').select('*').order('sort_order'),
+  sb.from('client_invoices').select('*').eq('client_id',selected.user_id).order('created_at',{ascending:false}),
+  sb.from('client_files').select('*').eq('client_id',selected.user_id).order('created_at',{ascending:false}),
+  sb.from('project_messages').select('*').eq('client_id',selected.user_id).order('created_at')
+ ]);
+ if(p.error){setError('Could not load projects: '+p.error.message);projects=[]}else projects=p.data||[];
+ if(ms.error && /sort_order|column/i.test(ms.error.message||'')) ms=await sb.from('project_milestones').select('*').order('created_at');
+ if(ms.error) setError('Milestones load error: '+ms.error.message);
+ if(inv.error) setError('Invoices load error: '+inv.error.message);
+ if(fl.error) setError('Files load error: '+fl.error.message);
+ if(msg.error) setError('Messages load error: '+msg.error.message);
+ const milestones=ms.data||[],invoices=inv.data||[],files=fl.data||[],messages=msg.data||[];
+ updateProjectStats();
+ $('#workspace').innerHTML=`<div class="tabs">
+ <button class="tab active" onclick="tab('projects',this)"><i class="fa-solid fa-diagram-project"></i> Projects</button>
+ <button class="tab" onclick="tab('milestones',this)"><i class="fa-solid fa-list-check"></i> Milestones</button>
+ <button class="tab" onclick="tab('invoices',this)"><i class="fa-regular fa-file-lines"></i> Invoices</button>
+ <button class="tab" onclick="tab('files',this)"><i class="fa-regular fa-folder-open"></i> Files</button>
+ <button class="tab" onclick="tab('messages',this)"><i class="fa-regular fa-comments"></i> Messages</button></div>
+
+ <div class="view active" id="v-projects"><h3 class="section-title">Project management</h3><form class="form" id="projectForm">
+ <label>Project title<input id="pt" required></label><label>Service type<input id="ps" placeholder="Website / App / System"></label>
+ <label>Status<select id="pst">${['planning','design','development','testing','review','completed','on_hold','cancelled'].map(x=>`<option>${x}</option>`).join('')}</select></label>
+ <label>Progress %<input id="pp" type="number" min="0" max="100" value="0"></label><label>Start date<input id="pd1" type="date"></label><label>Target date<input id="pd2" type="date"></label>
+ <label class="full">Description<textarea id="pdesc"></textarea></label><div><button class="btn"><i class="fa-solid fa-plus"></i> Create Project</button></div></form>
+ <div class="table-wrap"><table><thead><tr><th>Project</th><th>Status</th><th>Progress</th><th>Target</th><th>Action</th></tr></thead><tbody>${projects.map(p=>`<tr><td><strong>${esc(p.title)}</strong><br><small>${esc(p.service_type||'')}</small></td><td><span class="status-pill">${esc(p.status)}</span></td><td><div class="progress-wrap"><div class="progress-track"><div class="progress-bar" style="width:${Math.max(0,Math.min(100,Number(p.progress||0)))}%"></div></div><input style="width:68px" type="number" min="0" max="100" value="${Number(p.progress||0)}" onchange="updateProgress('${p.id}',this.value)"></div></td><td>${p.target_date||'—'}</td><td><button class="btn danger" onclick="deleteProject('${p.id}')"><i class="fa-regular fa-trash-can"></i> Delete</button></td></tr>`).join('')||'<tr><td colspan="5" class="empty">No projects for this client.</td></tr>'}</tbody></table></div></div>
+
+ <div class="view" id="v-milestones"><h3 class="section-title">Project milestones</h3><form class="form" id="mileForm"><label>Project<select id="mp" required>${projectOptions()}</select></label><label>Milestone title<input id="mt" required></label><label>Status<select id="ms"><option>pending</option><option>current</option><option>done</option></select></label><label>Due date<input id="md" type="date"></label><label class="full">Description<input id="mde"></label><div><button class="btn"><i class="fa-solid fa-plus"></i> Add Milestone</button></div></form><div class="table-wrap"><table><tbody>${milestones.filter(m=>projects.some(p=>p.id===m.project_id)).map(m=>`<tr><td><strong>${esc(m.title)}</strong></td><td><span class="status-pill">${esc(m.status)}</span></td><td>${m.due_date||'—'}</td><td><button class="btn danger" onclick="del('project_milestones','${m.id}')">Delete</button></td></tr>`).join('')||'<tr><td class="empty">No milestones.</td></tr>'}</tbody></table></div></div>
+
+ <div class="view" id="v-invoices"><h3 class="section-title">Client invoices</h3><form class="form" id="invoiceForm"><label>Project<select id="ip" required>${projectOptions()}</select></label><label>Invoice number<input id="ino" required placeholder="CM-0001"></label><label>Amount<input id="ia" type="number" step=".01" min="0" required></label><label>Due date<input id="idate" type="date"></label><label>Status<select id="is"><option>unpaid</option><option>part_paid</option><option>paid</option><option>overdue</option><option>cancelled</option></select></label><div><button class="btn"><i class="fa-solid fa-plus"></i> Add Invoice</button></div></form><div class="table-wrap"><table><tbody>${invoices.map(i=>`<tr><td><strong>${esc(i.invoice_number)}</strong></td><td>${money(i.amount)}</td><td><span class="status-pill">${esc(i.status)}</span></td><td><button class="btn danger" onclick="del('client_invoices','${i.id}')">Delete</button></td></tr>`).join('')||'<tr><td class="empty">No invoices.</td></tr>'}</tbody></table></div></div>
+
+ <div class="view" id="v-files"><h3 class="section-title">Project files</h3><form class="form" id="fileForm"><label>Project<select id="fp" required>${projectOptions()}</select></label><label class="full">File<input id="ff" type="file" required></label><div><button class="btn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload File</button></div></form><div class="table-wrap"><table><tbody>${files.map(f=>`<tr><td><i class="fa-regular fa-file"></i>&nbsp; ${esc(f.file_name)}</td><td>${new Date(f.created_at).toLocaleDateString('en-ZA')}</td><td><button class="btn danger" onclick="deleteFile('${f.id}','${esc(f.storage_path)}')">Delete</button></td></tr>`).join('')||'<tr><td class="empty">No files uploaded.</td></tr>'}</tbody></table></div></div>
+
+ <div class="view" id="v-messages"><h3 class="section-title">Client communication</h3><div class="message-list">${messages.map(m=>`<div class="message ${m.sender_role==='admin'?'admin':''}"><strong>${m.sender_role==='admin'?'CM Technologies':'Client'}</strong>${esc(m.body)}</div>`).join('')||'<div class="empty">No messages yet.</div>'}</div><form class="form" id="msgForm"><label>Project<select id="msgp" required>${projectOptions()}</select></label><label class="full">Message<textarea id="msg" required placeholder="Write a message to the client..."></textarea></label><div><button class="btn"><i class="fa-regular fa-paper-plane"></i> Send Message</button></div></form></div>`;
+ bindForms()
+}
+window.tab=(n,b)=>{document.querySelectorAll('.view,.tab').forEach(x=>x.classList.remove('active'));$('#v-'+n).classList.add('active');b.classList.add('active')};
+
+function bindForms(){
+ const projectForm=$('#projectForm');if(projectForm)projectForm.onsubmit=async e=>{e.preventDefault();const{error}=await sb.from('client_projects').insert({client_id:selected.user_id,title:$('#pt').value.trim(),service_type:$('#ps').value.trim()||null,status:$('#pst').value,progress:+$('#pp').value,start_date:$('#pd1').value||null,target_date:$('#pd2').value||null,description:$('#pdesc').value.trim()||null});if(error)return setError('Could not create project: '+error.message);await renderWorkspace()};
+ const mileForm=$('#mileForm');if(mileForm)mileForm.onsubmit=async e=>{e.preventDefault();if(!$('#mp').value)return alert('Create a project first.');const{error}=await sb.from('project_milestones').insert({project_id:$('#mp').value,title:$('#mt').value.trim(),status:$('#ms').value,due_date:$('#md').value||null,description:$('#mde').value.trim()||null});if(error)return setError('Could not add milestone: '+error.message);await renderWorkspace()};
+ const invoiceForm=$('#invoiceForm');if(invoiceForm)invoiceForm.onsubmit=async e=>{e.preventDefault();if(!$('#ip').value)return alert('Create a project first.');const{error}=await sb.from('client_invoices').insert({project_id:$('#ip').value,client_id:selected.user_id,invoice_number:$('#ino').value.trim(),amount:+$('#ia').value,due_date:$('#idate').value||null,status:$('#is').value});if(error)return setError('Could not add invoice: '+error.message);await renderWorkspace()};
+ const fileForm=$('#fileForm');if(fileForm)fileForm.onsubmit=async e=>{e.preventDefault();if(!$('#fp').value)return alert('Create a project first.');const file=$('#ff').files[0];if(!file)return;const path=`${selected.user_id}/${$('#fp').value}/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'_')}`;const up=await sb.storage.from('client-files').upload(path,file);if(up.error)return setError('Upload failed: '+up.error.message);const ins=await sb.from('client_files').insert({project_id:$('#fp').value,client_id:selected.user_id,file_name:file.name,storage_path:path});if(ins.error)return setError('File record failed: '+ins.error.message);await renderWorkspace()};
+ const msgForm=$('#msgForm');if(msgForm)msgForm.onsubmit=async e=>{e.preventDefault();if(!$('#msgp').value)return alert('Create a project first.');const{data:{user}}=await sb.auth.getUser();const{error}=await sb.from('project_messages').insert({project_id:$('#msgp').value,client_id:selected.user_id,sender_id:user.id,sender_role:'admin',body:$('#msg').value.trim()});if(error)return setError('Could not send message: '+error.message);await renderWorkspace()}
+}
+window.updateProgress=async(id,v)=>{const{error}=await sb.from('client_projects').update({progress:Math.max(0,Math.min(100,+v)),updated_at:new Date().toISOString()}).eq('id',id);if(error)return setError('Could not update progress: '+error.message);await renderWorkspace()};
+window.deleteProject=async id=>{if(!confirm('Delete this project and its linked data?'))return;const{error}=await sb.from('client_projects').delete().eq('id',id);if(error)return setError('Could not delete project: '+error.message);await renderWorkspace()};
+window.del=async(t,id)=>{if(!confirm('Delete this item?'))return;const{error}=await sb.from(t).delete().eq('id',id);if(error)return setError('Could not delete item: '+error.message);await renderWorkspace()};
+window.deleteFile=async(id,path)=>{if(!confirm('Delete this file?'))return;const rem=await sb.storage.from('client-files').remove([path]);if(rem.error)return setError('Could not delete stored file: '+rem.error.message);const{error}=await sb.from('client_files').delete().eq('id',id);if(error)return setError('Could not delete file record: '+error.message);await renderWorkspace()};
+
+(async()=>{if(!(await guard()))return;await loadClients();
+ sb.channel('admin-client-live')
+ .on('postgres_changes',{event:'*',schema:'public',table:'client_profiles'},loadClients)
+ .on('postgres_changes',{event:'*',schema:'public',table:'client_projects'},()=>selected&&renderWorkspace())
+ .on('postgres_changes',{event:'*',schema:'public',table:'project_messages'},()=>selected&&renderWorkspace())
+ .on('postgres_changes',{event:'*',schema:'public',table:'project_milestones'},()=>selected&&renderWorkspace())
+ .on('postgres_changes',{event:'*',schema:'public',table:'client_invoices'},()=>selected&&renderWorkspace())
+ .on('postgres_changes',{event:'*',schema:'public',table:'client_files'},()=>selected&&renderWorkspace()).subscribe()
+})();
+</script>
+</body>
+
+</html>

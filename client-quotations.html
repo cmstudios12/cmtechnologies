@@ -1,0 +1,409 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>CM Technologies | My Quotations</title>
+    <style>
+        :root {
+            --n: #07385d;
+            --b: #0b83c6;
+            --bg: #f4f8fb;
+            --ink: #142430;
+            --m: #687985;
+            --l: #dbe8ee;
+            --g: #1f9d73;
+            --r: #b94444
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            overflow-x: hidden
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg);
+            color: var(--ink)
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        header {
+            height: 72px;
+            background: #fff;
+            border-bottom: 1px solid var(--l);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 10
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font: 800 .95rem Manrope;
+            color: var(--n)
+        }
+
+        .mark {
+            width: 40px;
+            height: 40px;
+            background: var(--n);
+            color: #fff;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: .8rem
+        }
+
+        .links {
+            display: flex;
+            gap: 8px
+        }
+
+        .link,
+        .btn {
+            border: 1px solid var(--l);
+            background: #fff;
+            border-radius: 7px;
+            padding: 10px 13px;
+            font-size: .75rem;
+            font-weight: 800;
+            color: var(--n)
+        }
+
+        .btn.primary {
+            background: var(--b);
+            border-color: var(--b);
+            color: #fff
+        }
+
+        .btn.danger {
+            color: var(--r);
+            background: #fff4f4
+        }
+
+        main {
+            width: min(1280px, 100%);
+            margin: auto;
+            padding: 28px
+        }
+
+        .ey {
+            color: var(--b);
+            font-size: .67rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase
+        }
+
+        h1 {
+            font: 800 clamp(2rem, 4vw, 2.7rem)/1 Manrope;
+            color: var(--n);
+            letter-spacing: -.05em;
+            margin: 7px 0
+        }
+
+        .sub {
+            color: var(--m);
+            margin: 0 0 22px
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 16px
+        }
+
+        .stat,
+        .panel,
+        .quote {
+            background: #fff;
+            border: 1px solid var(--l);
+            border-radius: 10px
+        }
+
+        .stat {
+            padding: 16px
+        }
+
+        .stat span {
+            font-size: .7rem;
+            color: var(--m);
+            font-weight: 700
+        }
+
+        .stat strong {
+            display: block;
+            font: 800 1.5rem Manrope;
+            color: var(--n);
+            margin-top: 5px
+        }
+
+        .panel {
+            padding: 18px;
+            margin-bottom: 16px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px
+        }
+
+        .full {
+            grid-column: 1/-1
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            font-size: .7rem;
+            font-weight: 800;
+            color: #536773
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cfdee6;
+            border-radius: 7px;
+            padding: 10px 11px;
+            font-size: 16px;
+            outline: 0;
+            background: #fff
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--b);
+            box-shadow: 0 0 0 3px rgba(11, 131, 198, .08)
+        }
+
+        .items {
+            display: grid;
+            gap: 8px
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr 100px 140px 42px;
+            gap: 8px;
+            align-items: center
+        }
+
+        .item button {
+            height: 42px;
+            border: 1px solid #efcccc;
+            background: #fff4f4;
+            color: var(--r);
+            border-radius: 7px
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px
+        }
+
+        .quote {
+            padding: 18px;
+            margin-bottom: 12px
+        }
+
+        .qt {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px
+        }
+
+        .quote h3 {
+            font: 800 1.05rem Manrope;
+            color: var(--n);
+            margin: 0
+        }
+
+        .badge {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: #e7f4fb;
+            color: #0878b4;
+            font-size: .62rem;
+            font-weight: 800;
+            text-transform: capitalize;
+            height: max-content
+        }
+
+        .badge.accepted,
+        .badge.converted {
+            background: #e4f5ed;
+            color: #19815e
+        }
+
+        .badge.declined {
+            background: #f8e5e5;
+            color: #a33c3c
+        }
+
+        .money {
+            font: 800 1.2rem Manrope;
+            color: var(--n)
+        }
+
+        .meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            color: var(--m);
+            font-size: .72rem;
+            margin: 10px 0
+        }
+
+        .error {
+            background: #fff2f2;
+            border: 1px solid #efcccc;
+            padding: 11px;
+            border-radius: 7px;
+            color: #923b3b;
+            margin-bottom: 12px;
+            display: none
+        }
+
+        .error.show {
+            display: block
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 11px;
+            border-bottom: 1px solid #edf2f5;
+            font-size: .76rem
+        }
+
+        th {
+            font-size: .62rem;
+            text-transform: uppercase;
+            color: #71838e
+        }
+
+        @media(max-width:700px) {
+            header {
+                padding: 0 12px
+            }
+
+            .links .txt {
+                display: none
+            }
+
+            main {
+                padding: 20px 11px
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .full {
+                grid-column: auto
+            }
+
+            .item {
+                grid-template-columns: 1fr 70px 100px 40px
+            }
+
+            .qt {
+                display: block
+            }
+
+            .badge {
+                display: inline-block;
+                margin-top: 8px
+            }
+        }
+
+        @media(max-width:390px) {
+            .stats {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><a class="brand" href="client-portal.html"><span class="mark">CM</span>CM Technologies <small
+                style="color:#82949e">Client</small></a>
+        <div class="links"><a class="link" href="client-portal.html"><i class="fa-solid fa-arrow-left"></i> <span
+                    class="txt">Client Portal</span></a></div>
+    </header>
+    <main>
+        <div class="ey">Commercial documents</div>
+        <h1>My Quotations</h1>
+        <p class="sub">Review quotations from CM Technologies. You can accept or decline a quotation directly from your
+            account.</p>
+        <div class="stats">
+            <div class="stat"><span>Total</span><strong id="s0">0</strong></div>
+            <div class="stat"><span>Awaiting response</span><strong id="s1">0</strong></div>
+            <div class="stat"><span>Accepted</span><strong id="s2">0</strong></div>
+            <div class="stat"><span>Accepted value</span><strong id="s3">R0</strong></div>
+        </div>
+        <div class="error" id="err"></div>
+        <section id="list"></section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const sb = supabase.createClient('https://qwcnownpgjzaeuqaulvz.supabase.co', 'sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w'); let quotes = []; const $ = s => document.querySelector(s), esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c])); const money = n => 'R' + Number(n || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 }); const err = m => { $('#err').textContent = m || ''; $('#err').classList.toggle('show', !!m) };
+        async function load() { const { data: { session } } = await sb.auth.getSession(); if (!session) return location.replace('client-auth.html'); const q = await sb.from('client_quotations').select('*').eq('client_id', session.user.id).neq('status', 'draft').order('created_at', { ascending: false }); if (q.error) return err(q.error.message); quotes = q.data || []; const ids = quotes.map(x => x.id); let items = []; if (ids.length) { const r = await sb.from('quotation_items').select('*').in('quotation_id', ids).order('sort_order'); if (r.error) return err(r.error.message); items = r.data || [] } render(items) }
+        function render(items) { $('#s0').textContent = quotes.length; $('#s1').textContent = quotes.filter(q => q.status === 'sent').length; $('#s2').textContent = quotes.filter(q => ['accepted', 'converted'].includes(q.status)).length; $('#s3').textContent = 'R' + Math.round(quotes.filter(q => ['accepted', 'converted'].includes(q.status)).reduce((a, q) => a + Number(q.total || 0), 0)).toLocaleString('en-ZA'); $('#list').innerHTML = quotes.map(q => { const its = items.filter(i => i.quotation_id === q.id); const deposit = Number(q.total || 0) * Number(q.deposit_percent || 0) / 100; return `<article class="quote"><div class="qt"><div><div class="ey">${esc(q.quotation_number)}</div><h3>${esc(q.title)}</h3><div class="meta"><span>Issued: ${new Date(q.created_at).toLocaleDateString('en-ZA')}</span><span>Valid until: ${q.valid_until || 'Not specified'}</span></div></div><div><div class="money">${money(q.total)}</div><span class="badge ${q.status}">${q.status}</span></div></div>${q.description ? `<p style="color:var(--m)">${esc(q.description)}</p>` : ''}<div style="overflow:auto"><table><thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Total</th></tr></thead><tbody>${its.map(i => `<tr><td>${esc(i.description)}</td><td>${i.quantity}</td><td>${money(i.unit_price)}</td><td>${money(i.line_total)}</td></tr>`).join('')}</tbody></table></div><div class="meta"><strong>Subtotal: ${money(q.subtotal)}</strong><span>Discount: ${money(q.discount)}</span><span>Tax: ${money(q.tax)}</span><strong>Deposit (${q.deposit_percent}%): ${money(deposit)}</strong></div>${q.terms ? `<div class="panel" style="margin:12px 0 0"><strong style="color:var(--n)">Terms</strong><p style="color:var(--m);font-size:.78rem;line-height:1.6;margin-bottom:0">${esc(q.terms)}</p></div>` : ''}${q.status === 'sent' ? `<div class="actions"><button class="btn primary" onclick="respond('${q.id}','accepted')"><i class="fa-solid fa-check"></i> Accept Quotation</button><button class="btn danger" onclick="respond('${q.id}','declined')"><i class="fa-solid fa-xmark"></i> Decline</button></div>` : ''}</article>` }).join('') || '<div class="panel"><div style="text-align:center;color:var(--m)">No quotations have been sent to you yet.</div></div>' }
+        window.respond = async (id, status) => { const word = status === 'accepted' ? 'accept' : 'decline'; if (!confirm(`Are you sure you want to ${word} this quotation?`)) return; const patch = { status, updated_at: new Date().toISOString() }; patch[status === 'accepted' ? 'accepted_at' : 'declined_at'] = new Date().toISOString(); const r = await sb.from('client_quotations').update(patch).eq('id', id).eq('status', 'sent'); if (r.error) return err(r.error.message); load() };
+        (async () => { await load(); sb.channel('quotes-client').on('postgres_changes', { event: '*', schema: 'public', table: 'client_quotations' }, load).subscribe() })();
+    </script>
+</body>
+
+</html>

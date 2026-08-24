@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>CM Technologies | Admin Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#07385d;--blue:#0b83c6;--cyan:#19a6db;--ice:#eef6fa;--ink:#142430;
+      --muted:#687985;--line:#dbe8ee;--white:#fff;--danger:#b94444;--green:#1f9d73;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;font-family:"DM Sans",sans-serif;color:var(--ink);
+      background:#f4f9fc;display:grid;grid-template-columns:1.05fr .95fr;
+    }
+    .brand-side{
+      background:var(--navy);color:white;padding:60px;display:flex;flex-direction:column;
+      justify-content:space-between;position:relative;overflow:hidden
+    }
+    .brand-side:after{
+      content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+      right:-170px;bottom:-150px;background:#0b83c6
+    }
+    .brand{display:flex;gap:12px;align-items:center;position:relative;z-index:2}
+    .mark{width:48px;height:48px;background:white;color:var(--navy);display:grid;place-items:center;border-radius:12px;font:800 1rem "Manrope"}
+    .brand strong{display:block;font:800 1.05rem "Manrope"}
+    .brand small{display:block;color:#9fc5d8;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+    .brand-copy{position:relative;z-index:2;max-width:600px}
+    .brand-copy span{color:#76d2f1;text-transform:uppercase;letter-spacing:.15em;font-size:.75rem;font-weight:800}
+    .brand-copy h1{font:800 clamp(2.8rem,5vw,5.3rem)/.94 "Manrope";letter-spacing:-.06em;margin:16px 0}
+    .brand-copy p{color:#c0d8e5;max-width:540px}
+    .copyright{position:relative;z-index:2;color:#8fb5c9;font-size:.78rem}
+    .login-side{display:flex;align-items:center;justify-content:center;padding:36px}
+    .login-card{width:min(460px,100%);background:white;border:1px solid var(--line);padding:38px}
+    .login-card .eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:800}
+    .login-card h2{font:800 2rem "Manrope";color:var(--navy);margin:10px 0 7px}
+    .login-card>p{color:var(--muted);margin-bottom:28px}
+    .field{display:grid;gap:7px;margin-bottom:15px}
+    label{font-size:.8rem;font-weight:800;color:#50636f}
+    input{width:100%;min-height:52px;border:1px solid #cedfe7;padding:0 14px;font-size:16px;outline:none}
+    input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,131,198,.1)}
+    button{
+      width:100%;min-height:52px;border:0;background:var(--blue);color:white;font-weight:800;
+      margin-top:5px;cursor:pointer
+    }
+    button:disabled{opacity:.65;cursor:not-allowed}
+    .status{min-height:22px;margin-top:13px;font-size:.84rem;color:var(--muted)}
+    .status.error{color:var(--danger);font-weight:700}
+    .status.success{color:var(--green);font-weight:700}
+    .back{display:inline-block;margin-top:18px;color:var(--navy);font-size:.85rem;font-weight:700}
+    @media(max-width:850px){
+      body{grid-template-columns:1fr}
+      .brand-side{min-height:330px;padding:35px 24px}
+      .brand-copy h1{font-size:3rem}
+      .login-side{padding:28px 16px}
+    }
+    @media(max-width:520px){
+      .brand-side{min-height:270px}
+      .brand-copy p{display:none}
+      .login-card{padding:26px 20px}
+    }
+  </style>
+</head>
+<body>
+  <section class="brand-side">
+    <a class="brand" href="index.html">
+      <span class="mark">CM</span>
+      <span><strong>CM Technologies</strong><small>Technology. Innovation. Solutions.</small></span>
+    </a>
+    <div class="brand-copy">
+      <span>Administration</span>
+      <h1>Run the digital side of the business.</h1>
+      <p>Manage enquiries, projects, testimonials and company content from one secure workspace.</p>
+    </div>
+    <div class="copyright">CM Technologies · Secure staff access</div>
+  </section>
+
+  <section class="login-side">
+    <form class="login-card" id="loginForm">
+      <div class="eyebrow">Staff portal</div>
+      <h2>Sign in</h2>
+      <p>Use your authorised CM Technologies administrator account.</p>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email" required placeholder="admin@company.co.za">
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required minlength="6" placeholder="Your password">
+      </div>
+
+      <button id="submitBtn" type="submit">Sign In →</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <a class="back" href="index.html">← Back to website</a>
+    </form>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://qwcnownpgjzaeuqaulvz.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const form = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('status');
+
+    function status(msg, type=''){
+      statusEl.textContent = msg;
+      statusEl.className = 'status' + (type ? ' ' + type : '');
+    }
+
+    async function checkExisting(){
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) return;
+      const { data, error } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
+      if (!error && data) location.href = 'admin.html';
+      else await sb.auth.signOut();
+    }
+    checkExisting();
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Signing in...';
+      status('Checking your account...');
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error){
+        status('Incorrect email or password.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In →';
+        return;
+      }
+
+      const { data: admin, error: adminError } = await sb
+        .from('admin_users')
+        .select('user_id, display_name')
+        .eq('user_id', data.user.id)
+        .maybeSingle();
+
+      if (adminError || !admin){
+        await sb.auth.signOut();
+        status('This account is not authorised for the CM Technologies admin portal.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In →';
+        return;
+      }
+
+      status('Welcome. Opening dashboard...', 'success');
+      location.href = 'admin.html';
+    });
+  </script>
+</body>
+</html>

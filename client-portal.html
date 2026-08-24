@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CM Technologies | My Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+:root{
+ --navy:#07385d;--navy2:#0a456f;--blue:#0b83c6;--blue2:#0874af;--bg:#f4f8fb;
+ --ice:#eef6fa;--ink:#142430;--muted:#687985;--line:#dbe8ee;--green:#1f9d73;
+ --orange:#b97916;--red:#b94444;--white:#fff;--shadow:0 14px 38px rgba(7,56,93,.07)
+}
+*{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:hidden;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;width:100%;max-width:100%;overflow-x:hidden;font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer;touch-action:manipulation}
+a{color:inherit;text-decoration:none}img,svg{max-width:100%}
+.app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+
+/* SIDEBAR */
+aside{
+ background:linear-gradient(180deg,#062f50 0%,#07385d 58%,#063453 100%);
+ color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+ z-index:40;box-shadow:10px 0 35px rgba(7,56,93,.06)
+}
+.brand{display:flex;gap:11px;align-items:center;padding:5px 7px 25px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:17px}
+.mark{width:44px;height:44px;background:#fff;color:var(--navy);border-radius:9px;display:grid;place-items:center;font:800 .92rem Manrope;box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.brand strong{display:block;font:800 .94rem Manrope}.brand small{display:block;color:#9fc3d6;font-size:.55rem;letter-spacing:.11em;text-transform:uppercase;margin-top:2px}
+nav{display:grid;gap:4px}
+.nav{border:0;background:transparent;color:#bdd4df;text-align:left;padding:0 13px;border-radius:7px;font-weight:700;min-height:46px;display:flex;align-items:center;gap:12px;transition:.18s}
+.nav i{width:18px;text-align:center;font-size:.9rem;color:#8ebbd0}
+.nav.active,.nav:hover{background:rgba(255,255,255,.095);color:#fff}
+.nav.active i,.nav:hover i{color:#7bd2f1}
+.nav.request{background:var(--blue);color:#fff;margin-bottom:12px;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+.nav.request i{color:#fff}
+.sidebar-bottom{margin-top:auto}
+.user{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.08);padding:13px;border-radius:8px;display:flex;gap:10px;align-items:center}
+.avatar{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font:800 .75rem Manrope;flex:0 0 auto}
+.user-info{min-width:0}.user strong{display:block;font-size:.79rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user small{display:block;color:#9fc3d6;font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.logout{margin-top:8px;width:100%;min-height:42px;border:1px solid rgba(255,255,255,.15);border-radius:7px;background:transparent;color:#d4e3ea;font-weight:700;font-size:.76rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.logout:hover{background:rgba(255,255,255,.07);color:#fff}
+
+/* MAIN + HEADER */
+main{min-width:0}
+header{
+ height:76px;background:rgba(255,255,255,.98);border-bottom:1px solid var(--line);display:flex;align-items:center;
+ justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:30;box-shadow:0 5px 20px rgba(7,56,93,.025)
+}
+.header-left{display:flex;gap:12px;align-items:center}.header-title small{display:block;color:#82949e;font-size:.63rem;font-weight:700;margin-top:2px}
+header h1{font:800 1.08rem Manrope;color:var(--navy);margin:0}
+.menu{display:none;border:1px solid var(--line);border-radius:7px;background:#fff;width:42px;height:42px;color:var(--navy);font-size:1rem}
+.header-actions{display:flex;align-items:center;gap:9px}
+.website-link{height:40px;padding:0 13px;border:1px solid var(--line);border-radius:7px;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:800;color:var(--navy);background:#fff}
+.website-link:hover{border-color:#b9d4e1;background:#f8fbfd}
+.mobile-overlay{display:none}
+
+/* CONTENT */
+.content{padding:30px;max-width:1500px;margin:0 auto}
+.page{display:none;animation:pageIn .18s ease}.page.active{display:block}
+@keyframes pageIn{from{opacity:.55;transform:translateY(3px)}to{opacity:1;transform:none}}
+.page-head{margin-bottom:24px}
+.eyebrow{color:var(--blue);font-size:.67rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800}
+h2{font:800 clamp(1.8rem,3vw,2.35rem)/1.05 Manrope;color:var(--navy);letter-spacing:-.045em;margin:7px 0}
+.sub{color:var(--muted);margin:0;line-height:1.6;font-size:.9rem}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.stat,.panel,.project-card,.request-card{background:#fff;border:1px solid var(--line);border-radius:10px}
+.stat{padding:19px;position:relative;overflow:hidden;box-shadow:0 8px 25px rgba(7,56,93,.035)}
+.stat-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stat span{color:var(--muted);font-size:.72rem;font-weight:700}
+.stat-icon{width:38px;height:38px;border-radius:8px;background:#edf7fb;color:var(--blue);display:grid;place-items:center}
+.stat strong{display:block;font:800 1.65rem Manrope;color:var(--navy);margin-top:9px}
+.stat:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;background:#dcebf2}
+.stat:nth-child(2):after{background:#a8d7eb}.stat:nth-child(3):after{background:#83cbb2}.stat:nth-child(4):after{background:#e9c785}
+
+/* PANELS */
+.panel{margin-bottom:18px;box-shadow:0 8px 28px rgba(7,56,93,.035);overflow:hidden}
+.ph{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;align-items:center;background:#fff}
+.ph h3{margin:0;font:800 .96rem Manrope;color:var(--navy)}
+.pb{padding:19px}
+
+/* PROJECTS / REQUESTS */
+.project-card,.request-card{padding:20px;margin-bottom:14px;box-shadow:0 7px 24px rgba(7,56,93,.035)}
+.project-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.project-card h3,.request-card h3{font:800 1.12rem Manrope;color:var(--navy);margin:0}
+.badge{padding:6px 9px;border-radius:999px;background:#e7f4fb;color:#0878b4;font-size:.63rem;font-weight:800;text-transform:capitalize;height:max-content;white-space:nowrap}
+.badge.approved,.badge.converted{background:#e4f5ed;color:#19815e}.badge.rejected{background:#f8e5e5;color:#a33c3c}.badge.needs_info{background:#fff2d8;color:#9a650c}
+.progress{height:7px;border-radius:999px;background:#e8eff3;margin:17px 0 8px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,var(--blue),#32a7dc);border-radius:999px}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.73rem;gap:10px;flex-wrap:wrap}
+.timeline{display:grid;gap:0}.mile{display:grid;grid-template-columns:24px 1fr;gap:12px;position:relative;padding-bottom:20px}.dot{width:13px;height:13px;border-radius:50%;background:#c9d8df;margin-top:4px;z-index:2}.mile.done .dot{background:var(--green)}.mile.current .dot{background:var(--blue)}.mile:after{content:"";position:absolute;left:6px;top:15px;bottom:0;width:1px;background:#d7e3e9}.mile:last-child:after{display:none}.mile strong{display:block;font-size:.84rem}.mile small{color:var(--muted);font-size:.72rem}
+.admin-note{margin-top:14px;background:#f5f9fb;border:1px solid #e4edf2;border-radius:7px;padding:13px;color:#536773;font-size:.82rem;line-height:1.55}
+
+/* TABLES */
+.table{overflow:auto;width:100%}table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{padding:14px 16px;border-bottom:1px solid #edf2f5;text-align:left;font-size:.79rem}
+th{font-size:.63rem;text-transform:uppercase;letter-spacing:.06em;color:#71838e;background:#f8fbfc}
+tbody tr:hover{background:#fbfdfe}
+.btn{border:0;border-radius:7px;background:var(--blue);color:#fff;padding:10px 15px;font-weight:800;font-size:.77rem;min-height:42px;transition:.18s}
+.btn:hover{background:var(--blue2);transform:translateY(-1px)}.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn.soft{background:var(--ice);color:var(--navy);border:1px solid var(--line)}
+
+/* MESSAGES */
+.messages{display:grid;gap:10px;max-height:470px;overflow:auto;padding:4px 3px 15px}
+.msg{max-width:76%;padding:11px 13px;border-radius:4px 12px 12px 12px;background:var(--ice);font-size:.83rem;line-height:1.5}
+.msg.mine{margin-left:auto;background:#dff2fb;border-radius:12px 4px 12px 12px}
+.msg small{display:block;color:var(--muted);font-size:.61rem;margin-top:5px}
+.compose{display:grid;grid-template-columns:1fr auto;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.compose input{min-height:46px;border:1px solid #cfdfe7;border-radius:7px;padding:0 13px;font-size:16px;outline:0}
+.compose input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,131,198,.08)}
+
+/* FORMS */
+.empty{padding:34px;text-align:center;color:var(--muted);font-size:.84rem}
+.form-grid,.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:7px;font-size:.72rem;font-weight:800;color:#536773}
+label input,label select,label textarea{width:100%;min-height:49px;border:1px solid #cfdee6;border-radius:7px;padding:10px 12px;font-size:16px;background:#fff;outline:0}
+label input:focus,label select:focus,label textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,131,198,.08)}
+label textarea{min-height:135px;resize:vertical}.full{grid-column:1/-1}
+.notice{display:flex;gap:10px;align-items:flex-start;background:#eef8fc;border:1px solid #d4ebf5;border-radius:8px;padding:13px 14px;margin-bottom:17px;color:#45606f;font-size:.82rem;line-height:1.5}
+.notice i{color:var(--blue);margin-top:2px}
+.form-action{display:flex;align-items:center;gap:12px;margin-top:15px;flex-wrap:wrap}
+.form-status{font-size:.77rem;color:var(--green);font-weight:700}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:950px){
+ .app{grid-template-columns:1fr}
+ aside{position:fixed;left:-286px;width:272px;z-index:60;transition:left .22s ease;box-shadow:18px 0 45px rgba(4,37,61,.18)}
+ aside.open{left:0}.menu{display:grid;place-items:center}
+ .mobile-overlay{display:block;position:fixed;inset:0;background:rgba(4,31,50,.45);z-index:50;opacity:0;visibility:hidden;pointer-events:none;transition:.2s}
+ .mobile-overlay.show{opacity:1;visibility:visible;pointer-events:auto}
+ body.nav-open{overflow:hidden}
+}
+@media(max-width:650px){
+ header{padding:0 14px;height:66px}.header-title small{display:none}.website-link span{display:none}.website-link{width:40px;padding:0;justify-content:center}
+ .content{padding:20px 12px}.stats{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:14px}.stat-icon{width:33px;height:33px}
+ .stat strong{font-size:1.4rem}.form-grid,.profile-grid{grid-template-columns:1fr}.full{grid-column:auto}
+ .project-top{display:flex}.compose{grid-template-columns:1fr}.compose .btn{width:100%}.pb{padding:14px}.ph{padding:15px}
+ .project-card,.request-card{padding:16px}.page-head{margin-bottom:18px}h2{font-size:1.8rem}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr}.project-top{display:block}.badge{display:inline-block;margin-top:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style></head>
+<body>
+<div class="app">
+<aside id="side">
+  <a class="brand" href="index.html">
+    <span class="mark">CM</span>
+    <span><strong>CM Technologies</strong><small>Client Workspace</small></span>
+  </a>
+  <nav>
+    <button class="nav request" data-p="requests"><i class="fa-solid fa-plus"></i><span>Request a Project</span></button>
+    <button class="nav active" data-p="overview"><i class="fa-solid fa-grid-2"></i><span>Overview</span></button>
+    <button class="nav" data-p="projects"><i class="fa-solid fa-diagram-project"></i><span>My Projects</span></button>
+    <a class="nav" href="client-quotations.html"><i class="fa-solid fa-file-signature"></i><span>My Quotations</span></a>
+    <button class="nav" data-p="invoices"><i class="fa-regular fa-file-lines"></i><span>Invoices</span></button>
+    <button class="nav" data-p="files"><i class="fa-regular fa-folder-open"></i><span>Files</span></button>
+    <button class="nav" data-p="messages"><i class="fa-regular fa-comments"></i><span>Messages</span></button>
+    <button class="nav" data-p="account"><i class="fa-regular fa-user"></i><span>My Account</span></button>
+  <a class="nav" href="client-billing.html"><i class="fa-solid fa-file-invoice-dollar"></i><span>Billing & Receipts</span></a></nav>
+  <div class="sidebar-bottom">
+    <div class="user">
+      <span class="avatar" id="userAvatar">CL</span>
+      <span class="user-info"><strong id="userName">Client</strong><small id="userEmail"></small></span>
+    </div>
+    <button class="logout" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
+  </div>
+</aside>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<main>
+<header>
+  <div class="header-left">
+    <button class="menu" id="menu" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+    <div class="header-title"><h1 id="title">Overview</h1><small>CM Technologies Client Portal</small></div>
+  </div>
+  <div class="header-actions">
+    <a class="website-link" href="index.html"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>CM Website</span></a>
+  </div>
+</header>
+<div class="content">
+
+<section class="page" id="p-requests">
+<div class="page-head"><div class="eyebrow">New work</div><h2>Request a project</h2><p class="sub">Submit your project from your secure CM Technologies account and track the review here.</p></div>
+<div class="panel"><div class="ph"><h3>New project request</h3></div><div class="pb">
+<div class="notice"><i class="fa-solid fa-circle-info"></i><span>Your request will first be reviewed by CM Technologies. Once approved, it can be converted into a live project in your account.</span></div>
+<form id="requestForm"><div class="form-grid">
+<label>Project / business name<input id="rqTitle" required maxlength="140" placeholder="e.g. Restaurant Ordering App"></label>
+<label>Service<select id="rqService" required><option value="">Choose a service</option><option>Business Website</option><option>Web Platform</option><option>Android App</option><option>iOS App</option><option>Android + iOS App</option><option>Business System</option><option>UI/UX Design</option><option>Maintenance & Support</option></select></label>
+<label>Estimated budget<select id="rqBudget"><option value="">Not sure yet</option><option>R2,500 - R5,000</option><option>R5,000 - R10,000</option><option>R10,000 - R25,000</option><option>R25,000 - R50,000</option><option>R50,000+</option></select></label>
+<label>Preferred target date<input id="rqDate" type="date"></label>
+<label class="full">Project details<textarea id="rqDetails" required maxlength="3000" placeholder="Tell us what you want to build, who will use it and the main features you need."></textarea></label>
+</div><div class="form-action"><button class="btn" id="rqBtn">Submit Project Request <i class="fa-solid fa-arrow-right"></i></button><span id="rqStatus" class="form-status"></span></div></form>
+</div></div>
+<div class="panel"><div class="ph"><h3>My requests</h3></div><div class="pb" id="requestList"></div></div>
+</section>
+
+<section class="page active" id="p-overview"><div class="page-head"><div class="eyebrow">Client workspace</div><h2>Hello, <span id="helloName">there</span>.</h2><p class="sub">Here is the latest view of your CM Technologies work.</p></div><div class="stats">
+<div class="stat"><div class="stat-top"><span>Project requests</span><span class="stat-icon"><i class="fa-regular fa-paper-plane"></i></span></div><strong id="sRequests">0</strong></div>
+<div class="stat"><div class="stat-top"><span>Active projects</span><span class="stat-icon"><i class="fa-solid fa-diagram-project"></i></span></div><strong id="sActive">0</strong></div>
+<div class="stat"><div class="stat-top"><span>Average progress</span><span class="stat-icon"><i class="fa-solid fa-chart-line"></i></span></div><strong id="sProgress">0%</strong></div>
+<div class="stat"><div class="stat-top"><span>Open invoices</span><span class="stat-icon"><i class="fa-regular fa-file-lines"></i></span></div><strong id="sInvoices">0</strong></div>
+</div><div class="panel"><div class="ph"><h3>Current projects</h3></div><div class="pb" id="overviewProjects"></div></div></section>
+<section class="page" id="p-projects"><div class="page-head"><div class="eyebrow">Delivery</div><h2>My projects</h2><p class="sub">Track status, progress and milestones.</p></div><div id="allProjects"></div></section>
+<section class="page" id="p-invoices"><div class="page-head"><div class="eyebrow">Billing</div><h2>Invoices</h2><p class="sub">See amounts, due dates and payment status.</p></div><div class="panel"><div class="table"><table><thead><tr><th>Invoice</th><th>Project</th><th>Amount</th><th>Due</th><th>Status</th></tr></thead><tbody id="invoiceRows"></tbody></table></div></div></section>
+<section class="page" id="p-files"><div class="page-head"><div class="eyebrow">Documents</div><h2>Project files</h2><p class="sub">Files shared with you by CM Technologies.</p></div><div class="panel"><div class="table"><table><thead><tr><th>File</th><th>Project</th><th>Uploaded</th><th></th></tr></thead><tbody id="fileRows"></tbody></table></div></div></section>
+<section class="page" id="p-messages"><div class="page-head"><div class="eyebrow">Communication</div><h2>Messages</h2><p class="sub">Keep project communication in one place.</p></div><div class="panel"><div class="pb"><div class="messages" id="messageList"></div><form class="compose" id="messageForm"><input id="messageText" maxlength="1200" required placeholder="Write a message to CM Technologies..."><button class="btn">Send</button></form></div></div></section>
+<section class="page" id="p-account"><div class="page-head"><div class="eyebrow">Account</div><h2>My details</h2><p class="sub">Keep your contact information up to date.</p></div><form class="panel pb" id="profileForm"><div class="profile-grid"><label>Name & surname<input id="pfName" required maxlength="100"></label><label>Business<input id="pfBusiness" maxlength="120"></label><label>Phone<input id="pfPhone" maxlength="30"></label><label>Email<input id="pfEmail" disabled></label></div><div class="form-action"><button class="btn">Save Details <i class="fa-solid fa-check"></i></button><span id="pfStatus" class="form-status"></span></div></form></section>
+
+</div></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const sb=supabase.createClient('https://qwcnownpgjzaeuqaulvz.supabase.co','sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w');
+let me,profile,requests=[],projects=[],milestones=[],invoices=[],files=[],messages=[];
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])),date=s=>s?new Date(s).toLocaleDateString():'—',money=n=>'R '+Number(n||0).toLocaleString('en-ZA',{minimumFractionDigits:2});
+
+async function guard(){const{data:{session}}=await sb.auth.getSession();if(!session){location.href='client-auth.html';return false}me=session.user;return true}
+
+function goPage(name){
+ document.querySelectorAll('.nav,.page').forEach(x=>x.classList.remove('active'));
+ const btn=[...document.querySelectorAll('.nav')].find(b=>b.dataset.p===name);if(btn)btn.classList.add('active');
+ $('#p-'+name).classList.add('active');$('#title').textContent=btn?btn.querySelector('span').textContent:'Client Portal';closeNav();
+ history.replaceState(null,'','#'+name);
+}
+function openNav(){ $('#side').classList.add('open'); $('#mobileOverlay').classList.add('show'); document.body.classList.add('nav-open'); $('#menu').innerHTML='<i class="fa-solid fa-xmark"></i>'; }
+function closeNav(){ $('#side').classList.remove('open'); $('#mobileOverlay').classList.remove('show'); document.body.classList.remove('nav-open'); $('#menu').innerHTML='<i class="fa-solid fa-bars"></i>'; }
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>goPage(b.dataset.p));
+$('#menu').onclick=()=>$('#side').classList.contains('open')?closeNav():openNav();
+$('#mobileOverlay').onclick=closeNav;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
+window.addEventListener('resize',()=>{if(innerWidth>950)closeNav()});
+$('#logout').onclick=async()=>{await sb.auth.signOut();location.href='client-auth.html'};
+
+function projectCard(p){let ms=milestones.filter(m=>m.project_id===p.id);return `<article class="project-card"><div class="project-top"><div><h3>${esc(p.title)}</h3><small style="color:var(--muted)">${esc(p.service_type||'Digital Project')}</small></div><span class="badge">${esc(p.status)}</span></div><div class="progress"><div class="bar" style="width:${Math.max(0,Math.min(100,p.progress||0))}%"></div></div><div class="meta"><span>${p.progress||0}% complete</span><span>Target: ${date(p.target_date)}</span></div>${ms.length?`<div class="timeline" style="margin-top:22px">${ms.map(m=>`<div class="mile ${m.status}"><span class="dot"></span><div><strong>${esc(m.title)}</strong><small>${esc(m.description||'')}${m.due_date?' · '+date(m.due_date):''}</small></div></div>`).join('')}</div>`:''}</article>`}
+
+function renderRequests(){
+ $('#requestList').innerHTML=requests.map(r=>`<article class="request-card"><div class="project-top"><div><h3>${esc(r.title)}</h3><small style="color:var(--muted)">${esc(r.service)} · ${esc(r.budget||'Budget not specified')}</small></div><span class="badge ${r.status}">${esc(r.status.replace('_',' '))}</span></div><p style="color:var(--muted);font-size:.9rem;white-space:pre-wrap">${esc(r.details)}</p><div class="meta"><span>Submitted ${date(r.created_at)}</span><span>${r.target_date?'Preferred target: '+date(r.target_date):''}</span></div>${r.admin_response?`<div class="admin-note"><strong>CM Technologies:</strong><br>${esc(r.admin_response)}</div>`:''}</article>`).join('')||'<div class="empty">You have not submitted a project request yet.</div>';
+}
+
+function render(){
+ let active=projects.filter(p=>!['completed','cancelled'].includes(p.status));
+ $('#sRequests').textContent=requests.length;$('#sActive').textContent=active.length;$('#sProgress').textContent=(projects.length?Math.round(projects.reduce((a,p)=>a+(p.progress||0),0)/projects.length):0)+'%';$('#sInvoices').textContent=invoices.filter(i=>!['paid','cancelled'].includes(i.status)).length;
+ $('#overviewProjects').innerHTML=active.slice(0,3).map(projectCard).join('')||'<div class="empty">No active projects yet.</div>';
+ $('#allProjects').innerHTML=projects.map(projectCard).join('')||'<div class="panel empty">No live projects yet. Submit a project request to get started.</div>';
+ $('#invoiceRows').innerHTML=invoices.map(i=>`<tr><td><strong>${esc(i.invoice_number)}</strong></td><td>${esc(i.project_title||'—')}</td><td>${money(i.amount)}</td><td>${date(i.due_date)}</td><td>${esc(i.status)}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No invoices yet.</td></tr>';
+ $('#fileRows').innerHTML=files.map(f=>`<tr><td><strong>${esc(f.file_name)}</strong></td><td>${esc(f.project_title||'—')}</td><td>${date(f.created_at)}</td><td><button class="btn soft" onclick="downloadFile('${f.id}')">Download</button></td></tr>`).join('')||'<tr><td colspan="4" class="empty">No files shared yet.</td></tr>';
+ $('#messageList').innerHTML=messages.map(m=>`<div class="msg ${m.sender_role==='client'?'mine':''}">${esc(m.body)}<small>${m.sender_role==='client'?'You':'CM Technologies'} · ${date(m.created_at)}</small></div>`).join('')||'<div class="empty">No messages yet.</div>';
+ renderRequests();
+}
+
+async function load(){
+ const [rq,p,ms,inv,fl,msg]=await Promise.all([
+  sb.from('project_requests').select('*').order('created_at',{ascending:false}),
+  sb.from('client_projects').select('*').order('created_at',{ascending:false}),
+  sb.from('project_milestones').select('*').order('sort_order'),
+  sb.from('client_invoices').select('*,client_projects(title)').order('created_at',{ascending:false}),
+  sb.from('client_files').select('*,client_projects(title)').order('created_at',{ascending:false}),
+  sb.from('project_messages').select('*').order('created_at')
+ ]);
+ requests=rq.data||[];projects=p.data||[];milestones=ms.data||[];
+ invoices=(inv.data||[]).map(x=>({...x,project_title:x.client_projects?.title}));
+ files=(fl.data||[]).map(x=>({...x,project_title:x.client_projects?.title}));
+ messages=msg.data||[];render();
+}
+
+function prefillDraft(){
+ const raw=sessionStorage.getItem('cm_project_request_draft');if(!raw)return;
+ try{
+  const d=JSON.parse(raw);
+  $('#rqTitle').value=d.business?`${d.business} Project`:'';
+  $('#rqService').value=d.service||'';
+  $('#rqBudget').value=d.budget||'';
+  $('#rqDetails').value=d.message||'';
+ }catch(e){console.warn(e)}
+}
+
+$('#requestForm').onsubmit=async e=>{
+ e.preventDefault();
+ const btn=$('#rqBtn');btn.disabled=true;btn.textContent='Submitting...';$('#rqStatus').textContent='';
+ const payload={client_id:me.id,title:$('#rqTitle').value.trim(),service:$('#rqService').value,budget:$('#rqBudget').value||null,target_date:$('#rqDate').value||null,details:$('#rqDetails').value.trim(),status:'submitted'};
+ const{error}=await sb.from('project_requests').insert(payload);
+ if(error){console.error(error);$('#rqStatus').textContent='Could not submit request.'}
+ else{sessionStorage.removeItem('cm_project_request_draft');e.target.reset();$('#rqStatus').textContent='Request submitted successfully.';await load()}
+ btn.disabled=false;btn.innerHTML='Submit Project Request <i class="fa-solid fa-arrow-right"></i>';
+};
+
+window.downloadFile=async id=>{let f=files.find(x=>x.id===id);if(!f)return;let{data,error}=await sb.storage.from('client-files').createSignedUrl(f.storage_path,60);if(error)return alert('Could not open file.');window.open(data.signedUrl,'_blank')};
+
+$('#messageForm').onsubmit=async e=>{e.preventDefault();let body=$('#messageText').value.trim();if(!body)return;let project_id=projects[0]?.id||null;if(!project_id)return alert('A live project must exist before project messaging starts.');let{error}=await sb.from('project_messages').insert({project_id,client_id:me.id,sender_id:me.id,sender_role:'client',body});if(!error)$('#messageText').value=''};
+
+$('#profileForm').onsubmit=async e=>{e.preventDefault();let{error}=await sb.from('client_profiles').update({full_name:$('#pfName').value.trim(),business:$('#pfBusiness').value.trim()||null,phone:$('#pfPhone').value.trim()||null,updated_at:new Date().toISOString()}).eq('user_id',me.id);$('#pfStatus').textContent=error?'Could not save.':'Saved.'};
+
+(async()=>{
+ if(!(await guard()))return;
+ const{data}=await sb.from('client_profiles').select('*').eq('user_id',me.id).single();
+ profile=data||{};$('#userName').textContent=profile.full_name||'Client';$('#helloName').textContent=(profile.full_name||'there').split(' ')[0];$('#userEmail').textContent=me.email;
+ const initials=(profile.full_name||'Client').trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('');$('#userAvatar').textContent=initials||'CL';$('#pfName').value=profile.full_name||'';$('#pfBusiness').value=profile.business||'';$('#pfPhone').value=profile.phone||'';$('#pfEmail').value=me.email||'';
+ prefillDraft();await load();
+ const hash=location.hash.replace('#','');if(['requests','overview','projects','invoices','files','messages','account'].includes(hash))goPage(hash);
+ sb.channel('client-live')
+  .on('postgres_changes',{event:'*',schema:'public',table:'project_requests'},load)
+  .on('postgres_changes',{event:'*',schema:'public',table:'client_projects'},load)
+  .on('postgres_changes',{event:'*',schema:'public',table:'project_milestones'},load)
+  .on('postgres_changes',{event:'*',schema:'public',table:'client_invoices'},load)
+  .on('postgres_changes',{event:'*',schema:'public',table:'client_files'},load)
+  .on('postgres_changes',{event:'*',schema:'public',table:'project_messages'},load)
+  .subscribe();
+})();
+</script><a href="client-notifications.html" title="Notifications" aria-label="Notifications" style="position:fixed;right:18px;bottom:82px;width:48px;height:48px;border-radius:50%;background:#07385d;color:#fff;display:grid;place-items:center;text-decoration:none;box-shadow:0 8px 24px rgba(7,56,93,.22);z-index:80"><i class="fa-regular fa-bell"></i></a></body></html>
