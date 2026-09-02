@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
     <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/png" href="assets/images/cm-technologies-logo.png">
     <title>CM Technologies | Websites, Mobile Apps & Digital Systems</title>
     <meta name="description"
         content="CM Technologies builds professional websites, Android and iOS applications, business systems and connected digital solutions from Mbombela, South Africa.">
@@ -1292,6 +1293,239 @@
                 transition: none
             }
         }
+
+        .real-brand {
+            display: flex;
+            align-items: center;
+            min-width: 0
+        }
+
+        .real-brand img {
+            display: block;
+            width: auto;
+            height: 62px;
+            max-width: 290px;
+            object-fit: contain
+        }
+
+        .footer-logo img {
+            height: 82px;
+            max-width: 340px
+        }
+
+        @media(max-width:650px) {
+            .real-brand img {
+                height: 48px;
+                max-width: 205px
+            }
+
+            .footer-logo img {
+                height: 68px;
+                max-width: 275px
+            }
+        }
+
+        .chat-launcher {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 90;
+            border: 0;
+            background: #07385d;
+            color: #fff;
+            border-radius: 999px;
+            min-height: 56px;
+            padding: 0 19px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            box-shadow: 0 14px 38px rgba(7, 56, 93, .28)
+        }
+
+        .chat-launcher .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #35d399
+        }
+
+        .chat-panel {
+            position: fixed;
+            right: 18px;
+            bottom: 86px;
+            width: min(390px, calc(100vw - 28px));
+            height: min(610px, calc(100svh - 120px));
+            z-index: 100;
+            background: #fff;
+            border: 1px solid #d8e5eb;
+            border-radius: 16px;
+            box-shadow: 0 24px 70px rgba(7, 56, 93, .22);
+            display: none;
+            overflow: hidden
+        }
+
+        .chat-panel.open {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto
+        }
+
+        .chat-head {
+            background: #07385d;
+            color: #fff;
+            padding: 17px 18px;
+            display: flex;
+            align-items: center;
+            gap: 11px
+        }
+
+        .chat-head img {
+            width: 46px;
+            height: 38px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 7px
+        }
+
+        .chat-head strong {
+            font: 800 .84rem Manrope
+        }
+
+        .chat-head small {
+            display: block;
+            color: #b8d5e4;
+            font-size: .62rem
+        }
+
+        .chat-close {
+            margin-left: auto;
+            border: 0;
+            background: none;
+            color: #fff;
+            font-size: 1rem
+        }
+
+        .chat-note {
+            padding: 9px 14px;
+            background: #eef8fc;
+            border-bottom: 1px solid #dce8ee;
+            color: #58717e;
+            font-size: .65rem
+        }
+
+        .chat-start,
+        .chat-messages {
+            padding: 16px;
+            overflow: auto;
+            background: #f7fafc
+        }
+
+        .chat-start h4 {
+            font: 800 1.05rem Manrope;
+            color: #07385d;
+            margin: 0 0 5px
+        }
+
+        .chat-start p {
+            font-size: .7rem;
+            color: #687985;
+            line-height: 1.55
+        }
+
+        .chat-start input {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #cfdee6;
+            border-radius: 8px;
+            padding: 0 11px;
+            font-size: 16px;
+            margin: 5px 0
+        }
+
+        .chat-messages {
+            display: none;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .bubble {
+            max-width: 82%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: .75rem;
+            line-height: 1.55
+        }
+
+        .bubble.client {
+            align-self: flex-end;
+            background: #0b83c6;
+            color: #fff
+        }
+
+        .bubble.admin {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid #dbe8ee
+        }
+
+        .bubble small {
+            display: block;
+            font-size: .55rem;
+            opacity: .7;
+            margin-top: 5px
+        }
+
+        .chat-compose {
+            display: none;
+            border-top: 1px solid #dbe8ee;
+            background: #fff;
+            padding: 11px;
+            grid-template-columns: 1fr 44px;
+            gap: 8px
+        }
+
+        .chat-compose textarea {
+            height: 44px;
+            resize: none;
+            border: 1px solid #cfdee6;
+            border-radius: 9px;
+            padding: 11px;
+            font-size: 16px
+        }
+
+        .chat-compose button {
+            border: 0;
+            border-radius: 9px;
+            background: #0b83c6;
+            color: #fff
+        }
+
+        @media(max-width:650px) {
+            .chat-launcher {
+                right: 14px;
+                bottom: 14px;
+                width: 56px;
+                padding: 0;
+                justify-content: center
+            }
+
+            .chat-launcher .label,
+            .chat-launcher .dot {
+                display: none
+            }
+
+            .chat-panel {
+                left: 10px;
+                right: 10px;
+                bottom: 80px;
+                width: auto;
+                height: calc(100svh - 94px)
+            }
+
+            .whatsapp {
+                right: 80px
+            }
+        }
     </style>
 </head>
 
@@ -1304,8 +1538,8 @@
     </div>
     <header class="header">
         <div class="container nav">
-            <a class="brand" href="#home"><span class="mark">CM</span><span><strong>CM
-                        Technologies</strong><small>Technology. Innovation. Solutions.</small></span></a>
+            <a class="brand real-brand" href="#home" aria-label="CM Technologies home"><img
+                    src="assets/images/cm-technologies-logo.png" alt="CM Technologies - Think Build Grow"></a>
             <nav class="navlinks" id="navLinks"><a href="#about">About</a><a href="#direction">Vision & Mission</a><a
                     href="#technology">Technology</a><a href="#work">Work</a><a href="#process">Process</a><a
                     href="team.html">Our Team</a><a
@@ -1614,10 +1848,9 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand"><a class="brand" href="#home"><span class="mark"
-                            style="background:#fff;color:#07385d">CM</span><span><strong style="color:#fff">CM
-                                Technologies</strong><small style="color:#8fb1c4">Technology. Innovation.
-                                Solutions.</small></span></a>
+                <div class="footer-brand"><a class="brand real-brand footer-logo" href="#home"
+                        aria-label="CM Technologies home"><img src="assets/images/cm-technologies-logo.png"
+                            alt="CM Technologies - Think Build Grow"></a>
                     <p>Websites, mobile applications and connected digital systems engineered around real business
                         needs.</p>
                 </div>
@@ -1687,6 +1920,27 @@
             if (session) { location.href = 'client-portal.html#requests' } else { location.href = 'client-auth.html?next=request' }
         });
     </script>
+    <button class="chat-launcher" id="chatLauncher"><span class="dot"></span><i class="fa-regular fa-message"></i><span
+            class="label">Message us</span></button>
+    <section class="chat-panel" id="chatPanel">
+        <div class="chat-head"><img src="assets/images/cm-technologies-logo.png" alt="">
+            <div><strong>CM Technologies</strong><small>● Live support</small></div><button class="chat-close"
+                id="chatClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-note">Send us a message and our team can reply here in real time.</div>
+        <div class="chat-start" id="chatStart">
+            <h4>Start a conversation</h4>
+            <p>Enter your details and connect with CM Technologies.</p><input id="chatName"
+                placeholder="Name & surname"><input id="chatEmail" type="email" placeholder="Email address"><button
+                class="btn primary" id="startChatBtn">Start live chat →</button>
+            <div class="status" id="chatStatus"></div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <form class="chat-compose" id="chatForm"><textarea id="chatInput" maxlength="1500"
+                placeholder="Type your message…"></textarea><button><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+    </section>
+    <script>let cu = null, cc = null, ch = null; const cp = document.getElementById('chatPanel'), cm = document.getElementById('chatMessages'), cs = document.getElementById('chatStart'), cf = document.getElementById('chatForm'); document.getElementById('chatLauncher').onclick = () => cp.classList.add('open'); document.getElementById('chatClose').onclick = () => cp.classList.remove('open'); async function authChat() { let { data: { session } } = await sb.auth.getSession(); if (!session) { let r = await sb.auth.signInAnonymously(); if (r.error) throw Error('Enable Anonymous Sign-Ins in Supabase Authentication.'); cu = r.data.user } else cu = session.user } async function restore() { let { data: { session } } = await sb.auth.getSession(); if (!session) return; cu = session.user; let { data } = await sb.from('live_chat_conversations').select('*').eq('customer_id', cu.id).in('status', ['waiting', 'open']).order('created_at', { ascending: false }).limit(1).maybeSingle(); if (data) { cc = data; activate() } } document.getElementById('startChatBtn').onclick = async () => { let n = document.getElementById('chatName').value.trim(), e = document.getElementById('chatEmail').value.trim(), s = document.getElementById('chatStatus'); if (!n || !e) { s.textContent = 'Enter your name and email.'; return } try { await authChat(); let r = await sb.from('live_chat_conversations').insert({ customer_id: cu.id, customer_name: n, customer_email: e }).select().single(); if (r.error) throw r.error; cc = r.data; await sb.from('live_chat_messages').insert({ conversation_id: cc.id, sender_id: cu.id, sender_type: 'client', body: 'Hello, I would like assistance.' }); activate() } catch (x) { s.textContent = x.message } }; async function activate() { cs.style.display = 'none'; cm.style.display = 'flex'; cf.style.display = 'grid'; await load(); ch = sb.channel('webchat-' + cc.id).on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'live_chat_messages', filter: 'conversation_id=eq.' + cc.id }, x => add(x.new)).subscribe() } async function load() { let { data } = await sb.from('live_chat_messages').select('*').eq('conversation_id', cc.id).order('created_at'); cm.innerHTML = ''; (data || []).forEach(add) } function add(m) { let d = document.createElement('div'); d.className = 'bubble ' + (m.sender_type === 'admin' ? 'admin' : 'client'); d.textContent = m.body; let t = document.createElement('small'); t.textContent = (m.sender_type === 'admin' ? 'CM Technologies' : 'You') + ' · ' + new Date(m.created_at || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); d.appendChild(t); cm.appendChild(d); cm.scrollTop = cm.scrollHeight } cf.onsubmit = async e => { e.preventDefault(); let i = document.getElementById('chatInput'), b = i.value.trim(); if (!b) return; let r = await sb.from('live_chat_messages').insert({ conversation_id: cc.id, sender_id: cu.id, sender_type: 'client', body: b }); if (!r.error) { i.value = ''; await sb.from('live_chat_conversations').update({ status: 'waiting', last_message_at: new Date().toISOString() }).eq('id', cc.id) } }; restore();</script>
 </body>
 
 </html>
