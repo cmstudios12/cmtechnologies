@@ -3,329 +3,1707 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <meta name="theme-color" content="#07385d">
+
+    <meta name="description"
+        content="Meet the team behind CM Technologies — technology, innovation and digital solutions built for real businesses.">
+
     <title>Our Team | CM Technologies</title>
+
     <link rel="icon" type="image/png" href="assets/images/cm-technologies-logo.png">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
         :root {
             --navy: #07385d;
+            --navy-dark: #052c49;
             --blue: #0b83c6;
+            --cyan: #43b9e7;
+
+            --ink: #11232f;
+            --muted: #667985;
+
+            --line: #dce8ee;
             --ice: #eef6fa;
-            --ink: #142430;
-            --muted: #687985;
-            --line: #dbe8ee;
-            --white: #fff;
-            --container: 1180px
+            --soft: #f7fafc;
+
+            --white: #ffffff;
+
+            --shadow-sm: 0 8px 24px rgba(7, 56, 93, .06);
+            --shadow-md: 0 18px 45px rgba(7, 56, 93, .10);
+            --shadow-lg: 0 28px 70px rgba(7, 56, 93, .14);
+
+            --radius: 8px;
         }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
-            font-family: "DM Sans", sans-serif;
+            margin: 0;
+            min-width: 0;
+            overflow-x: hidden;
+
+            background: var(--white);
             color: var(--ink);
-            background: #fff;
+
+            font-family: "DM Sans", sans-serif;
             line-height: 1.55;
-            overflow-x: hidden
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body.menu-open {
+            overflow: hidden;
         }
 
         a {
+            color: inherit;
             text-decoration: none;
-            color: inherit
         }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
         .container {
-            width: min(var(--container), calc(100% - 42px));
-            margin: auto
+            width: min(1240px, calc(100% - 44px));
+            margin: 0 auto;
         }
 
+
+        /* =========================================================
+           UTILITY BAR
+        ========================================================= */
+
+        .utility {
+            height: 34px;
+
+            background: var(--navy);
+            color: #c9dfeb;
+
+            font-size: .72rem;
+        }
+
+        .utility .container {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .utility-left {
+            font-weight: 500;
+        }
+
+        .utility-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .utility-right span {
+            display: inline-flex;
+            align-items: center;
+
+            white-space: nowrap;
+        }
+
+        .utility i {
+            margin-right: 7px;
+            color: #6fd0ef;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
         .header {
-            height: 86px;
-            border-bottom: 1px solid var(--line);
-            background: rgba(255, 255, 255, .97);
+            height: 82px;
+
             position: sticky;
             top: 0;
-            z-index: 20
+            z-index: 100;
+
+            background: rgba(255, 255, 255, .98);
+
+            border-bottom: 1px solid var(--line);
         }
 
         .nav {
             height: 100%;
+
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 28px
         }
 
-        .brand img {
-            height: 58px;
-            width: auto;
-            max-width: 270px;
-            object-fit: contain
-        }
 
-        .links {
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
+        .brand {
             display: flex;
             align-items: center;
-            gap: 25px;
-            font-size: .83rem;
-            font-weight: 800;
-            color: #4d6471
+            gap: 12px;
+
+            min-width: 0;
+            flex: 0 0 auto;
         }
 
-        .links a:hover {
-            color: var(--blue)
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+
+            flex: 0 0 98px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background: transparent;
         }
 
-        .back {
-            color: var(--blue)
+        .brand-logo img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
         }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .navlinks {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 24px;
+        }
+
+        .navlinks > a {
+            position: relative;
+
+            color: #435965;
+
+            font-size: .76rem;
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition: color .2s ease;
+        }
+
+        .navlinks > a:hover {
+            color: var(--blue);
+        }
+
+        .navlinks > a.active {
+            color: var(--blue);
+        }
+
+        .navlinks > a.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: -31px;
+
+            height: 2px;
+
+            background: var(--blue);
+        }
+
+
+        /* =========================================================
+           CLIENT SIGN IN
+        ========================================================= */
+
+        .signin {
+            padding-left: 22px !important;
+
+            border-left: 1px solid var(--line);
+
+            color: var(--navy) !important;
+        }
+
+        .signin i {
+            margin-right: 6px;
+        }
+
+        .signin:hover {
+            color: var(--blue) !important;
+        }
+
+
+        /* =========================================================
+           START PROJECT
+        ========================================================= */
+
+        .start {
+            min-height: 42px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 17px;
+
+            border-radius: 5px;
+
+            background: var(--blue);
+            color: #fff !important;
+
+            font-weight: 800 !important;
+
+            box-shadow: 0 8px 18px rgba(11, 131, 198, .18);
+
+            transition:
+                background .2s ease,
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .start:hover {
+            background: var(--navy) !important;
+
+            transform: translateY(-1px);
+
+            box-shadow: 0 10px 22px rgba(7, 56, 93, .20);
+        }
+
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        .menu {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            margin-left: auto;
+
+            border: 1px solid var(--line);
+            border-radius: 6px;
+
+            background: #fff;
+            color: var(--navy);
+
+            font-size: 1rem;
+
+            transition: .2s ease;
+        }
+
+        .menu:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
 
         .hero {
-            background: linear-gradient(180deg, #f5fbfe, #fff);
-            padding: 85px 0 60px
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 90px 0 75px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f4fbfe 0%,
+                    #ffffff 100%
+                );
+
+            border-bottom: 1px solid #edf3f6;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 430px;
+            height: 430px;
+
+            top: -220px;
+            right: -180px;
+
+            border-radius: 50%;
+
+            background: rgba(67, 185, 231, .08);
+
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            left: -130px;
+            bottom: -160px;
+
+            border-radius: 50%;
+
+            background: rgba(11, 131, 198, .05);
+
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
         }
 
         .eyebrow {
-            font-size: .72rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
             color: var(--blue);
-            letter-spacing: .16em;
+
+            font-size: .71rem;
+            font-weight: 800;
+
+            letter-spacing: .15em;
             text-transform: uppercase;
-            font-weight: 800
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 25px;
+            height: 2px;
+
+            background: var(--blue);
         }
 
         .hero h1 {
-            font: 800 clamp(2.7rem, 6vw, 5.3rem)/.98 "Manrope";
-            letter-spacing: -.06em;
+            max-width: 900px;
+
+            margin: 14px 0 20px;
+
             color: var(--navy);
-            max-width: 850px;
-            margin: 12px 0 18px
+
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5.4rem);
+            font-weight: 800;
+            line-height: .98;
+
+            letter-spacing: -.065em;
         }
 
         .hero p {
-            max-width: 680px;
+            max-width: 690px;
+
+            margin: 0;
+
             color: var(--muted);
-            font-size: 1.02rem
+
+            font-size: 1.03rem;
+            line-height: 1.75;
         }
+
+
+        /* =========================================================
+           TEAM SECTION
+        ========================================================= */
+
+        .team-section {
+            padding: 76px 0 105px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 32px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+
+            color: var(--navy);
+
+            font-family: "Manrope", sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.15;
+
+            letter-spacing: -.035em;
+        }
+
+        .section-heading p {
+            max-width: 500px;
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: .88rem;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           TEAM GRID
+        ========================================================= */
 
         .grid {
-            padding: 25px 0 100px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 24px;
         }
+
+
+        /* =========================================================
+           TEAM CARD
+        ========================================================= */
 
         .card {
-            border: 1px solid var(--line);
+            min-width: 0;
+
+            overflow: hidden;
+
             background: #fff;
-            box-shadow: 0 18px 45px rgba(7, 56, 93, .08);
-            overflow: hidden
+
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
         }
 
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color: #c9e0ea;
+
+            box-shadow: var(--shadow-lg);
+        }
+
+
+        /* =========================================================
+           TEAM PHOTO
+        ========================================================= */
+
         .photo {
-            aspect-ratio: 4/3;
-            background: #eaf2f6 center/cover no-repeat
+            position: relative;
+
+            aspect-ratio: 4 / 3;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f3f8,
+                    #d9eaf1
+                );
+
+            background-position: center;
+            background-size: cover;
+        }
+
+        .photo::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent 65%,
+                    rgba(7, 56, 93, .12)
+                );
+
+            pointer-events: none;
         }
 
         .photo.none {
             display: grid;
             place-items: center;
-            background: var(--navy);
-            color: #fff
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy),
+                    #0b608f
+                );
         }
 
-        .photo.none:after {
-            content: "CM";
-            font: 800 2rem "Manrope"
+        .photo.none::after {
+            display: none;
         }
+
+        .photo.none::before {
+            content: "CM";
+
+            width: 86px;
+            height: 86px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 50%;
+
+            color: #fff;
+
+            font-family: "Manrope", sans-serif;
+            font-size: 1.65rem;
+            font-weight: 800;
+
+            letter-spacing: -.05em;
+        }
+
+
+        /* =========================================================
+           CARD BODY
+        ========================================================= */
 
         .body {
-            padding: 22px
+            padding: 24px 24px 27px;
         }
 
         .role {
-            font-size: .68rem;
+            margin-bottom: 7px;
+
             color: var(--blue);
+
+            font-size: .66rem;
             font-weight: 800;
+
+            letter-spacing: .12em;
             text-transform: uppercase;
-            letter-spacing: .1em
         }
 
         .name {
-            font: 800 1.35rem/1.1 "Manrope";
+            margin: 0 0 12px;
+
             color: var(--navy);
-            margin: 7px 0 10px
+
+            font-family: "Manrope", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1.15;
+
+            letter-spacing: -.035em;
         }
 
         .bio {
-            font-size: .86rem;
-            color: var(--muted)
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: .84rem;
+            line-height: 1.72;
         }
+
+
+        /* =========================================================
+           LOADING / EMPTY STATE
+        ========================================================= */
 
         .status {
-            text-align: center;
+            grid-column: 1 / -1;
+
+            min-height: 240px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px;
+
+            border: 1px dashed #cbdde5;
+            border-radius: var(--radius);
+
+            background: var(--soft);
+
             color: var(--muted);
-            grid-column: 1/-1;
-            padding: 50px
+
+            text-align: center;
+
+            font-size: .9rem;
         }
 
+        .status-icon {
+            width: 48px;
+            height: 48px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 14px;
+
+            border-radius: 50%;
+
+            background: var(--ice);
+            color: var(--blue);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
         .footer {
+            padding: 30px 0;
+
+            background: #f8fbfd;
+
             border-top: 1px solid var(--line);
-            padding: 28px 0;
-            color: var(--muted);
-            font-size: .78rem
         }
 
         .footer-inner {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            gap: 20px
+
+            gap: 25px;
+
+            color: var(--muted);
+
+            font-size: .76rem;
         }
 
-        .mobile {
-            display: none;
-            border: 1px solid var(--line);
-            background: #fff;
-            width: 42px;
-            height: 42px;
+        .footer-copy {
+            display: flex;
+            flex-direction: column;
+
+            gap: 4px;
+        }
+
+        .footer-copy strong {
             color: var(--navy);
-            border-radius: 8px
+
+            font-size: .78rem;
         }
 
-        @media(max-width:850px) {
+        .footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: var(--blue);
+
+            font-weight: 800;
+
+            transition: .2s ease;
+        }
+
+        .footer a:hover {
+            gap: 10px;
+
+            color: var(--navy);
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .navlinks {
+                gap: 18px;
+            }
+
+            .navlinks > a {
+                font-size: .71rem;
+            }
+
             .grid {
-                grid-template-columns: 1fr 1fr
-            }
-
-            .links {
-                gap: 14px
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media(max-width:620px) {
-            .header {
-                height: 74px
-            }
 
-            .brand img {
-                height: 47px;
-                max-width: 200px
-            }
+        /* =========================================================
+           MOBILE
+        ========================================================= */
 
-            .mobile {
-                display: block
-            }
+        @media (max-width: 850px) {
 
-            .links {
+            .utility-right {
                 display: none;
-                position: absolute;
+            }
+
+            .utility .container {
+                justify-content: center;
+            }
+
+            .header {
+                height: 74px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+
+                flex-basis: 42px;
+            }
+
+            .brand-text strong {
+                font-size: .92rem;
+            }
+
+            .brand-text small {
+                font-size: .56rem;
+            }
+
+            /* Mobile menu button */
+
+            .menu {
+                display: block;
+            }
+
+            /* Mobile navigation */
+
+            .navlinks {
+                position: fixed;
+
+                top: 74px;
                 left: 14px;
                 right: 14px;
-                top: 80px;
-                background: #fff;
-                border: 1px solid var(--line);
-                padding: 14px;
-                box-shadow: 0 15px 40px rgba(7, 56, 93, .12);
+
+                margin: 0;
+
+                padding: 10px;
+
+                display: none;
+
                 flex-direction: column;
-                align-items: stretch
+                align-items: stretch;
+
+                gap: 0;
+
+                background: #fff;
+
+                border: 1px solid var(--line);
+                border-radius: 7px;
+
+                box-shadow: var(--shadow-lg);
             }
 
-            .links.open {
-                display: flex
+            .navlinks.open {
+                display: flex;
+            }
+
+            .navlinks > a {
+                padding: 14px 13px;
+
+                border-bottom: 1px solid var(--line);
+
+                font-size: .82rem;
+            }
+
+            .navlinks > a:last-child {
+                border-bottom: 0;
+            }
+
+            .navlinks > a.active::after {
+                display: none;
+            }
+
+            .signin {
+                padding-left: 13px !important;
+
+                border-left: 0;
+            }
+
+            .start {
+                min-height: 45px;
+
+                margin-top: 9px;
+
+                text-align: center;
+            }
+
+            /* Hero */
+
+            .hero {
+                padding: 65px 0 55px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.65rem, 12vw, 4rem);
+            }
+
+            .hero p {
+                font-size: .95rem;
+            }
+
+            /* Team */
+
+            .team-section {
+                padding: 55px 0 75px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: min(1240px, calc(100% - 28px));
+            }
+
+            .utility {
+                font-size: .64rem;
+            }
+
+            .utility .container {
+                text-align: center;
             }
 
             .grid {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+            .card:hover {
+                transform: none;
             }
 
             .hero {
-                padding: 60px 0 35px
+                padding: 55px 0 45px;
             }
 
-            .container {
-                width: min(var(--container), calc(100% - 28px))
+            .hero h1 {
+                margin-top: 13px;
+
+                font-size: 2.7rem;
+
+                letter-spacing: -.055em;
+            }
+
+            .hero p {
+                font-size: .9rem;
+                line-height: 1.7;
+            }
+
+            .section-heading h2 {
+                font-size: 1.65rem;
+            }
+
+            .section-heading p {
+                font-size: .83rem;
+            }
+
+            .body {
+                padding: 21px 20px 23px;
+            }
+
+            .name {
+                font-size: 1.3rem;
             }
 
             .footer-inner {
-                flex-direction: column
+                align-items: flex-start;
+
+                flex-direction: column;
             }
         }
+
+
+        /* =========================================================
+           VERY SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 390px) {
+
+            .brand-text small {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.45rem;
+            }
+
+            .eyebrow {
+                font-size: .64rem;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
-    <header id="header">
-    <div class="container">
-      <nav>
 
-        <a href="#home" class="brand-logo">
-          <div class="brand-mark">CM</div>
+    <!-- =========================================================
+         UTILITY BAR
+    ========================================================= -->
 
-          <div class="brand-text">
-            <strong>CMSTUDIO</strong>
-            <small>Creative Media Studios</small>
-          </div>
-        </a>
+    <div class="utility">
 
-        <div class="nav-links" id="navLinks">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#process">Process</a>
-          <a href="team.html">Our Team</a>
-          <a href="#contact">Contact</a>
-        </div>
+        <div class="container">
 
-        <div class="nav-actions">
-          <a href="#contact" class="btn btn-primary">
-            Start a Project
-          </a>
-
-          <button
-            class="menu-btn"
-            id="menuBtn"
-            aria-label="Open navigation"
-          >
-            <i class="fa-solid fa-bars"></i>
-          </button>
-        </div>
-
-      </nav>
-    </div>
-  </header>
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="eyebrow">The people behind the technology</div>
-                <h1>Meet the team building what’s next.</h1>
-                <p>Our team combines technology, creativity and practical problem-solving to build digital products that
-                    businesses and their customers can actually use.</p>
+            <div class="utility-left">
+                Digital products engineered for real business.
             </div>
+
+            <div class="utility-right">
+
+                <span>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Mbombela, South Africa
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-phone"></i>
+                    081 840 1398
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header class="header">
+
+        <div class="container nav">
+
+            <a
+                class="brand"
+                href="index.html"
+                aria-label="CM Technologies Home">
+
+                <span class="brand-logo">
+
+                    <img
+                        src="assets/images/cm-technologies-logo.png"
+                        alt="CM Technologies">
+
+                </span>
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav
+                class="navlinks"
+                id="navLinks">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#about">
+                    About
+                </a>
+
+                <a href="index.html#direction">
+                    Vision &amp; Mission
+                </a>
+
+                <a href="index.html#technology">
+                    Technology
+                </a>
+
+                <a href="index.html#work">
+                    Work
+                </a>
+
+                <a href="index.html#process">
+                    Process
+                </a>
+
+                <a
+                    href="team.html"
+                    class="active"
+                    aria-current="page">
+
+                    Our Team
+
+                </a>
+
+                <a href="index.html#contact">
+                    Contact
+                </a>
+
+                <a
+                    class="signin"
+                    href="client-auth.html">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    Client Sign In
+
+                </a>
+
+                <a
+                    class="start"
+                    href="index.html#contact">
+
+                    Start a Project
+
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile menu -->
+
+            <button
+                class="menu"
+                id="menuBtn"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
+
+    <main>
+
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section class="hero">
+
+            <div class="container hero-inner">
+
+                <div class="eyebrow">
+                    The people behind the technology
+                </div>
+
+                <h1>
+                    Meet the team building what’s next.
+                </h1>
+
+                <p>
+                    Our team combines technology, creativity and
+                    practical problem-solving to build digital
+                    products that businesses and their customers
+                    can actually use.
+                </p>
+
+            </div>
+
         </section>
-        <section class="container grid" id="teamGrid">
-            <div class="status">Loading our team...</div>
+
+
+        <!-- =====================================================
+             TEAM
+        ===================================================== -->
+
+        <section class="team-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            The people behind CM Technologies
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        A focused team bringing together technical
+                        expertise, creative thinking and a
+                        commitment to building solutions that
+                        create real value.
+                    </p>
+
+                </div>
+
+
+                <!-- Dynamic team grid -->
+
+                <div
+                    class="grid"
+                    id="teamGrid">
+
+                    <div class="status">
+
+                        <div class="status-icon">
+
+                            <i class="fa-solid fa-circle-notch fa-spin"></i>
+
+                        </div>
+
+                        Loading our team...
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
+
     </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
     <footer class="footer">
-        <div class="container footer-inner"><span>© 2026 CM Technologies. Think • Build • Grow.</span><a
-                href="index.html">Back to CM Technologies →</a></div>
+
+        <div class="container footer-inner">
+
+            <div class="footer-copy">
+
+                <strong>
+                    CM Technologies
+                </strong>
+
+                <span>
+                    © 2026 CM Technologies. Think • Build • Grow.
+                </span>
+
+            </div>
+
+            <a href="index.html">
+
+                Back to CM Technologies
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
     </footer>
+
+
+    <!-- =========================================================
+         SUPABASE
+    ========================================================= -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>const sb = supabase.createClient('https://qwcnownpgjzaeuqaulvz.supabase.co', 'sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w'); const grid = document.getElementById('teamGrid'); const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m])); async function load() { const { data, error } = await sb.from('team_members').select('id,name,role,bio,image_url').eq('published', true).order('sort_order', { ascending: true }).order('created_at', { ascending: true }); if (error) { console.error(error); grid.innerHTML = '<div class="status">Our team is temporarily unavailable.</div>'; return } if (!data?.length) { grid.innerHTML = '<div class="status">Team profiles will appear here soon.</div>'; return } grid.innerHTML = data.map(m => `<article class="card"><div class="photo ${m.image_url ? '' : 'none'}" ${m.image_url ? `style="background-image:url('${esc(m.image_url)}')"` : ''}></div><div class="body"><div class="role">${esc(m.role)}</div><h2 class="name">${esc(m.name)}</h2><p class="bio">${esc(m.bio || '')}</p></div></article>`).join('') } load(); sb.channel('public-team-live').on('postgres_changes', { event: '*', schema: 'public', table: 'team_members' }, load).subscribe(); document.getElementById('mobile').onclick = () => document.getElementById('links').classList.toggle('open');</script>
+
+    <script>
+
+        /* =========================================================
+           SUPABASE
+        ========================================================= */
+
+        const sb = supabase.createClient(
+            'https://qwcnownpgjzaeuqaulvz.supabase.co',
+            'sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w'
+        );
+
+
+        /* =========================================================
+           DOM
+        ========================================================= */
+
+        const grid = document.getElementById('teamGrid');
+
+        const menuBtn = document.getElementById('menuBtn');
+
+        const navLinks = document.getElementById('navLinks');
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function esc(value) {
+
+            return String(value ?? '').replace(
+                /[&<>"']/g,
+                char => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[char])
+            );
+
+        }
+
+
+        /* =========================================================
+           SAFE IMAGE URL
+        ========================================================= */
+
+        function safeUrl(value) {
+
+            if (!value) {
+                return '';
+            }
+
+            try {
+
+                const url = new URL(value);
+
+                if (
+                    url.protocol !== 'http:' &&
+                    url.protocol !== 'https:'
+                ) {
+                    return '';
+                }
+
+                return esc(url.href);
+
+            } catch {
+
+                return '';
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOAD TEAM
+        ========================================================= */
+
+        async function loadTeam() {
+
+            grid.innerHTML = `
+                <div class="status">
+
+                    <div class="status-icon">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    </div>
+
+                    Loading our team...
+
+                </div>
+            `;
+
+
+            const {
+                data,
+                error
+            } = await sb
+
+                .from('team_members')
+
+                .select(`
+                    id,
+                    name,
+                    role,
+                    bio,
+                    image_url
+                `)
+
+                .eq('published', true)
+
+                .order('sort_order', {
+                    ascending: true
+                })
+
+                .order('created_at', {
+                    ascending: true
+                });
+
+
+            /* =====================================================
+               ERROR
+            ===================================================== */
+
+            if (error) {
+
+                console.error(
+                    'Team loading error:',
+                    error
+                );
+
+                grid.innerHTML = `
+                    <div class="status">
+
+                        <div class="status-icon">
+                            <i class="fa-solid fa-users-slash"></i>
+                        </div>
+
+                        Our team is temporarily unavailable.
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            /* =====================================================
+               EMPTY
+            ===================================================== */
+
+            if (!data || data.length === 0) {
+
+                grid.innerHTML = `
+                    <div class="status">
+
+                        <div class="status-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        Team profiles will appear here soon.
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            /* =====================================================
+               RENDER TEAM
+            ===================================================== */
+
+            grid.innerHTML = data.map(member => {
+
+                const imageUrl = safeUrl(
+                    member.image_url
+                );
+
+                const photoClass = imageUrl
+                    ? 'photo'
+                    : 'photo none';
+
+                const photoStyle = imageUrl
+                    ? `style="background-image:url('${imageUrl}')"`
+                    : '';
+
+
+                return `
+                    <article class="card">
+
+                        <div
+                            class="${photoClass}"
+                            ${photoStyle}
+                            role="img"
+                            aria-label="${esc(member.name)}">
+                        </div>
+
+
+                        <div class="body">
+
+                            <div class="role">
+                                ${esc(member.role)}
+                            </div>
+
+                            <h2 class="name">
+                                ${esc(member.name)}
+                            </h2>
+
+                            ${
+                                member.bio
+                                    ? `
+                                        <p class="bio">
+                                            ${esc(member.bio)}
+                                        </p>
+                                    `
+                                    : ''
+                            }
+
+                        </div>
+
+                    </article>
+                `;
+
+            }).join('');
+
+        }
+
+
+        /* =========================================================
+           INITIAL LOAD
+        ========================================================= */
+
+        loadTeam();
+
+
+        /* =========================================================
+           SUPABASE REALTIME
+        ========================================================= */
+
+        sb
+
+            .channel('public-team-live')
+
+            .on(
+                'postgres_changes',
+                {
+                    event: '*',
+                    schema: 'public',
+                    table: 'team_members'
+                },
+                () => {
+
+                    loadTeam();
+
+                }
+            )
+
+            .subscribe();
+
+
+        /* =========================================================
+           CLOSE MOBILE MENU
+        ========================================================= */
+
+        function closeMenu() {
+
+            navLinks.classList.remove('open');
+
+            document.body.classList.remove('menu-open');
+
+            menuBtn.setAttribute(
+                'aria-expanded',
+                'false'
+            );
+
+            menuBtn.setAttribute(
+                'aria-label',
+                'Open navigation menu'
+            );
+
+            menuBtn.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+
+        /* =========================================================
+           TOGGLE MOBILE MENU
+        ========================================================= */
+
+        function toggleMenu() {
+
+            const isOpen =
+                navLinks.classList.toggle('open');
+
+
+            document.body.classList.toggle(
+                'menu-open',
+                isOpen
+            );
+
+
+            menuBtn.setAttribute(
+                'aria-expanded',
+                String(isOpen)
+            );
+
+
+            menuBtn.setAttribute(
+                'aria-label',
+                isOpen
+                    ? 'Close navigation menu'
+                    : 'Open navigation menu'
+            );
+
+
+            menuBtn.innerHTML = isOpen
+
+                ? '<i class="fa-solid fa-xmark"></i>'
+
+                : '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+
+        menuBtn.addEventListener(
+            'click',
+            toggleMenu
+        );
+
+
+        /* =========================================================
+           CLOSE AFTER NAVIGATION
+        ========================================================= */
+
+        navLinks
+            .querySelectorAll('a')
+            .forEach(link => {
+
+                link.addEventListener(
+                    'click',
+                    closeMenu
+                );
+
+            });
+
+
+        /* =========================================================
+           CLICK OUTSIDE
+        ========================================================= */
+
+        document.addEventListener(
+            'click',
+            event => {
+
+                if (
+                    window.innerWidth > 850 ||
+                    !navLinks.classList.contains('open')
+                ) {
+                    return;
+                }
+
+
+                if (
+                    !navLinks.contains(event.target) &&
+                    !menuBtn.contains(event.target)
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           ESCAPE KEY
+        ========================================================= */
+
+        document.addEventListener(
+            'keydown',
+            event => {
+
+                if (
+                    event.key === 'Escape' &&
+                    navLinks.classList.contains('open')
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           RESIZE
+        ========================================================= */
+
+        window.addEventListener(
+            'resize',
+            () => {
+
+                if (window.innerWidth > 850) {
+                    closeMenu();
+                }
+
+            }
+        );
+
+    </script>
+
 </body>
 
 </html>
