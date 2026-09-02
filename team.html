@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <title>Our Team | CM Technologies</title>
+    <link rel="icon" type="image/png" href="assets/images/cm-technologies-logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --navy: #07385d;
+            --blue: #0b83c6;
+            --ice: #eef6fa;
+            --ink: #142430;
+            --muted: #687985;
+            --line: #dbe8ee;
+            --white: #fff;
+            --container: 1180px
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--ink);
+            background: #fff;
+            line-height: 1.55;
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        .container {
+            width: min(var(--container), calc(100% - 42px));
+            margin: auto
+        }
+
+        .header {
+            height: 86px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, .97);
+            position: sticky;
+            top: 0;
+            z-index: 20
+        }
+
+        .nav {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px
+        }
+
+        .brand img {
+            height: 58px;
+            width: auto;
+            max-width: 270px;
+            object-fit: contain
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: .83rem;
+            font-weight: 800;
+            color: #4d6471
+        }
+
+        .links a:hover {
+            color: var(--blue)
+        }
+
+        .back {
+            color: var(--blue)
+        }
+
+        .hero {
+            background: linear-gradient(180deg, #f5fbfe, #fff);
+            padding: 85px 0 60px
+        }
+
+        .eyebrow {
+            font-size: .72rem;
+            color: var(--blue);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-weight: 800
+        }
+
+        .hero h1 {
+            font: 800 clamp(2.7rem, 6vw, 5.3rem)/.98 "Manrope";
+            letter-spacing: -.06em;
+            color: var(--navy);
+            max-width: 850px;
+            margin: 12px 0 18px
+        }
+
+        .hero p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 1.02rem
+        }
+
+        .grid {
+            padding: 25px 0 100px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            background: #fff;
+            box-shadow: 0 18px 45px rgba(7, 56, 93, .08);
+            overflow: hidden
+        }
+
+        .photo {
+            aspect-ratio: 4/3;
+            background: #eaf2f6 center/cover no-repeat
+        }
+
+        .photo.none {
+            display: grid;
+            place-items: center;
+            background: var(--navy);
+            color: #fff
+        }
+
+        .photo.none:after {
+            content: "CM";
+            font: 800 2rem "Manrope"
+        }
+
+        .body {
+            padding: 22px
+        }
+
+        .role {
+            font-size: .68rem;
+            color: var(--blue);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em
+        }
+
+        .name {
+            font: 800 1.35rem/1.1 "Manrope";
+            color: var(--navy);
+            margin: 7px 0 10px
+        }
+
+        .bio {
+            font-size: .86rem;
+            color: var(--muted)
+        }
+
+        .status {
+            text-align: center;
+            color: var(--muted);
+            grid-column: 1/-1;
+            padding: 50px
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 28px 0;
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px
+        }
+
+        .mobile {
+            display: none;
+            border: 1px solid var(--line);
+            background: #fff;
+            width: 42px;
+            height: 42px;
+            color: var(--navy);
+            border-radius: 8px
+        }
+
+        @media(max-width:850px) {
+            .grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .links {
+                gap: 14px
+            }
+        }
+
+        @media(max-width:620px) {
+            .header {
+                height: 74px
+            }
+
+            .brand img {
+                height: 47px;
+                max-width: 200px
+            }
+
+            .mobile {
+                display: block
+            }
+
+            .links {
+                display: none;
+                position: absolute;
+                left: 14px;
+                right: 14px;
+                top: 80px;
+                background: #fff;
+                border: 1px solid var(--line);
+                padding: 14px;
+                box-shadow: 0 15px 40px rgba(7, 56, 93, .12);
+                flex-direction: column;
+                align-items: stretch
+            }
+
+            .links.open {
+                display: flex
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero {
+                padding: 60px 0 35px
+            }
+
+            .container {
+                width: min(var(--container), calc(100% - 28px))
+            }
+
+            .footer-inner {
+                flex-direction: column
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+    <div class="container">
+      <nav>
+
+        <a href="#home" class="brand-logo">
+          <div class="brand-mark">CM</div>
+
+          <div class="brand-text">
+            <strong>CMSTUDIO</strong>
+            <small>Creative Media Studios</small>
+          </div>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#process">Process</a>
+          <a href="team.html">Our Team</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-primary">
+            Start a Project
+          </a>
+
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open navigation"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="eyebrow">The people behind the technology</div>
+                <h1>Meet the team building what’s next.</h1>
+                <p>Our team combines technology, creativity and practical problem-solving to build digital products that
+                    businesses and their customers can actually use.</p>
+            </div>
+        </section>
+        <section class="container grid" id="teamGrid">
+            <div class="status">Loading our team...</div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container footer-inner"><span>© 2026 CM Technologies. Think • Build • Grow.</span><a
+                href="index.html">Back to CM Technologies →</a></div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>const sb = supabase.createClient('https://qwcnownpgjzaeuqaulvz.supabase.co', 'sb_publishable_drkh09ngSxCqH7dgGHc9bg_DKoxxz5w'); const grid = document.getElementById('teamGrid'); const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m])); async function load() { const { data, error } = await sb.from('team_members').select('id,name,role,bio,image_url').eq('published', true).order('sort_order', { ascending: true }).order('created_at', { ascending: true }); if (error) { console.error(error); grid.innerHTML = '<div class="status">Our team is temporarily unavailable.</div>'; return } if (!data?.length) { grid.innerHTML = '<div class="status">Team profiles will appear here soon.</div>'; return } grid.innerHTML = data.map(m => `<article class="card"><div class="photo ${m.image_url ? '' : 'none'}" ${m.image_url ? `style="background-image:url('${esc(m.image_url)}')"` : ''}></div><div class="body"><div class="role">${esc(m.role)}</div><h2 class="name">${esc(m.name)}</h2><p class="bio">${esc(m.bio || '')}</p></div></article>`).join('') } load(); sb.channel('public-team-live').on('postgres_changes', { event: '*', schema: 'public', table: 'team_members' }, load).subscribe(); document.getElementById('mobile').onclick = () => document.getElementById('links').classList.toggle('open');</script>
+</body>
+
+</html>
