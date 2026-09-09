@@ -5021,7 +5021,13 @@ function setupRealtime() {
         )
 
 
-        .on('postgres_changes',{event:'*',schema:'public',table:'conversations'},()=>loadMessages())
+        .on('postgres_changes',{event:'*',schema:'public',table:'live_chat_conversations'},()=>loadMessages())
+        .on('postgres_changes',{event:'*',schema:'public',table:'live_chat_messages'}, async payload => {
+            if (opState.conversation && payload?.new?.conversation_id && String(payload.new.conversation_id) === String(opState.conversation.id)) {
+                await loadConversationMessages(opState.conversation.id);
+            }
+            await loadMessages();
+        })
         .on('postgres_changes',{event:'*',schema:'public',table:'project_requests'},()=>loadRequests())
         .on('postgres_changes',{event:'*',schema:'public',table:'quotations'},()=>loadQuotations())
         .on('postgres_changes',{event:'*',schema:'public',table:'clients'},()=>loadClients())
@@ -5119,27 +5125,182 @@ function statusBadge(s){
  return `<span class="badge ${cls}">${escapeHTML(x)}</span>`;
 }
 async function loadMessages(){
- const list=$('conversationList'); if(!list)return;
- const r=await opQuery('conversations'); opState.messages=r.data;
- if(!r.data.length){list.innerHTML='<div class="empty"><i class="fa-solid fa-comments"></i><strong>No conversations yet</strong><span>Customer chats will appear here.</span></div>';return}
- list.innerHTML=r.data.map((x,i)=>`<div class="conversation ${opState.conversation&&String(opState.conversation.id)===String(x.id)?'active':''}" onclick="selectConversation('${x.id}')"><div class="conversation-row"><div class="conversation-avatar">${escapeHTML(initials(x.customer_name||x.name||'C'))}</div><div class="conversation-copy"><strong>${escapeHTML(x.customer_name||x.name||'Customer')}</strong><span>${escapeHTML(x.last_message||'New conversation')}</span></div>${Number(x.unread_count||0)?`<div class="unread">${x.unread_count}</div>`:''}</div></div>`).join('');
- if(opState.conversation) renderChat();
+    const list = $('conversationList');
+    if (!list) return;
+
+    list.innerHTML = '<div class="loader"><div class="spinner"></div>Loading customer conversations...</div>';
+
+    try {
+        const { data: conversations, error } = await sb
+            .from('live_chat_conversations')
+            .select('id, customer_id, customer_name, customer_email, status, last_message_at, created_at')
+            .order('last_message_at', { ascending: false, nullsFirst: false });
+
+        if (error) throw error;
+
+        const rows = conversations || [];
+
+        if (!rows.length) {
+            opState.messages = [];
+            opState.conversation = null;
+            list.innerHTML = '<div class="empty"><i class="fa-solid fa-comments"></i><strong>No customer messages yet</strong><span>New live-chat conversations will appear here automatically.</span></div>';
+            $('chatCustomer').textContent = 'Select a conversation';
+            $('chatContact').textContent = 'Customer messages will appear here.';
+            $('chatInput').disabled = true;
+            $('chatSend').disabled = true;
+            $('chatBody').innerHTML = '<div class="empty"><i class="fa-solid fa-comments"></i><strong>No conversation selected</strong><span>Select a customer conversation from the inbox.</span></div>';
+            return;
+        }
+
+        // Load the latest message for every conversation so the inbox has a useful preview.
+        const enriched = await Promise.all(rows.map(async c => {
+            const { data: latest } = await sb
+                .from('live_chat_messages')
+                .select('body, sender_type, created_at')
+                .eq('conversation_id', c.id)
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+            return { ...c, last_message: latest?.body || '', last_sender_type: latest?.sender_type || '' };
+        }));
+
+        opState.messages = enriched;
+
+        list.innerHTML = enriched.map(c => `
+            <div class="conversation ${opState.conversation && String(opState.conversation.id) === String(c.id) ? 'active' : ''}"
+                 onclick="selectConversation('${String(c.id).replace(/'/g, "\\'")}')">
+                <div class="conversation-row">
+                    <div class="conversation-avatar">${escapeHTML(initials(c.customer_name || 'Customer'))}</div>
+                    <div class="conversation-copy">
+                        <strong>${escapeHTML(c.customer_name || 'Customer')}</strong>
+                        <span>${escapeHTML(c.last_message || 'New conversation')}</span>
+                    </div>
+                    ${c.status === 'open' ? '<span class="badge badge-green">Live</span>' : '<span class="badge badge-orange">'+escapeHTML(c.status || 'open')+'</span>'}
+                </div>
+            </div>
+        `).join('');
+
+        if (opState.conversation) {
+            const exists = enriched.find(c => String(c.id) === String(opState.conversation.id));
+            if (exists) {
+                opState.conversation = exists;
+                await loadConversationMessages(exists.id);
+            }
+        }
+    } catch (error) {
+        console.error('loadMessages:', error);
+        opState.messages = [];
+        list.innerHTML = `<div class="empty"><i class="fa-solid fa-triangle-exclamation"></i><strong>Could not load customer messages</strong><span>${escapeHTML(error.message || 'Check the live-chat tables and admin permissions in Supabase.')}</span></div>`;
+    }
 }
+
 async function selectConversation(id){
- opState.conversation=opState.messages.find(x=>String(x.id)===String(id))||null;
- renderChat(); await loadMessages();
+    const conversation = opState.messages.find(x => String(x.id) === String(id));
+    if (!conversation) return;
+    opState.conversation = conversation;
+    document.querySelectorAll('#conversationList .conversation').forEach(el => el.classList.remove('active'));
+    const selected = [...document.querySelectorAll('#conversationList .conversation')].find(el => el.getAttribute('onclick')?.includes(String(id)));
+    if (selected) selected.classList.add('active');
+    await loadConversationMessages(id);
 }
+
+async function loadConversationMessages(conversationId){
+    const c = opState.conversation;
+    if (!c || String(c.id) !== String(conversationId)) return;
+
+    try {
+        const { data, error } = await sb
+            .from('live_chat_messages')
+            .select('id, conversation_id, sender_id, sender_type, body, created_at')
+            .eq('conversation_id', conversationId)
+            .order('created_at', { ascending: true });
+
+        if (error) throw error;
+        c.messages = data || [];
+        renderChat();
+    } catch (error) {
+        console.error('loadConversationMessages:', error);
+        $('chatBody').innerHTML = `<div class="empty"><i class="fa-solid fa-triangle-exclamation"></i><strong>Could not load messages</strong><span>${escapeHTML(error.message || 'Unable to read this conversation.')}</span></div>`;
+    }
+}
+
 function renderChat(){
- const c=opState.conversation;if(!c)return;
- $('chatCustomer').textContent=c.customer_name||c.name||'Customer';
- $('chatContact').textContent=[c.customer_email,c.customer_phone].filter(Boolean).join(' · ')||'Customer conversation';
- $('chatInput').disabled=false;$('chatSend').disabled=false;
- const messages=c.messages||[];
- $('chatBody').innerHTML=messages.length?messages.map(m=>`<div class="bubble-row ${m.sender_type==='admin'?'admin':'customer'}"><div class="bubble">${escapeHTML(m.message||'')}<small>${formatDateTime(m.created_at)}</small></div></div>`).join(''):'<div class="empty"><i class="fa-solid fa-message"></i><strong>No messages yet</strong><span>Start the conversation below.</span></div>';
- $('chatBody').scrollTop=$('chatBody').scrollHeight;
+    const c = opState.conversation;
+    if (!c) return;
+
+    $('chatCustomer').textContent = c.customer_name || 'Customer';
+    $('chatContact').textContent = [c.customer_email].filter(Boolean).join(' · ') || 'Live customer conversation';
+    $('chatStatus').textContent = c.status === 'closed' ? '● Closed' : '● Live';
+    $('chatStatus').className = 'badge ' + (c.status === 'closed' ? 'badge-orange' : 'badge-green');
+    $('chatInput').disabled = c.status === 'closed';
+    $('chatSend').disabled = c.status === 'closed';
+
+    const messages = c.messages || [];
+    $('chatBody').innerHTML = messages.length
+        ? messages.map(m => `
+            <div class="bubble-row ${m.sender_type === 'admin' ? 'admin' : 'customer'}">
+                <div class="bubble">
+                    ${escapeHTML(m.body || '')}
+                    <small>${m.sender_type === 'admin' ? 'You' : escapeHTML(c.customer_name || 'Customer')} · ${formatDateTime(m.created_at)}</small>
+                </div>
+            </div>
+        `).join('')
+        : '<div class="empty"><i class="fa-solid fa-message"></i><strong>No messages yet</strong><span>Start the conversation below.</span></div>';
+
+    $('chatBody').scrollTop = $('chatBody').scrollHeight;
 }
-$('chatForm')?.addEventListener('submit',async e=>{e.preventDefault();if(!opState.conversation)return;const text=$('chatInput').value.trim();if(!text)return;opState.conversation.messages=opState.conversation.messages||[];opState.conversation.messages.push({sender_type:'admin',message:text,created_at:new Date().toISOString()});opState.conversation.last_message=text;await opUpdate('conversations',opState.conversation.id,{last_message:text,updated_at:new Date().toISOString(),messages:opState.conversation.messages});$('chatInput').value='';renderChat();loadMessages();});
-$('messageSearch')?.addEventListener('input',()=>{const q=$('messageSearch').value.toLowerCase();document.querySelectorAll('#conversationList .conversation').forEach(el=>el.style.display=el.textContent.toLowerCase().includes(q)?'':'none')});
+
+$('chatForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const c = opState.conversation;
+    const input = $('chatInput');
+    const text = input.value.trim();
+    if (!c || !text || c.status === 'closed') return;
+
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+        showToast('Session expired', 'Please sign in again.', 'error');
+        return;
+    }
+
+    const send = $('chatSend');
+    send.disabled = true;
+    input.disabled = true;
+
+    try {
+        const { error } = await sb.from('live_chat_messages').insert({
+            conversation_id: c.id,
+            sender_id: user.id,
+            sender_type: 'admin',
+            body: text
+        });
+        if (error) throw error;
+
+        await sb.from('live_chat_conversations')
+            .update({ last_message_at: new Date().toISOString() })
+            .eq('id', c.id);
+
+        input.value = '';
+        await loadConversationMessages(c.id);
+        await loadMessages();
+        showToast('Message sent', 'Your reply was delivered to the customer.', 'success');
+    } catch (error) {
+        console.error('sendMessage:', error);
+        showToast('Message failed', error.message || 'Could not send the reply.', 'error');
+    } finally {
+        if (opState.conversation) {
+            input.disabled = opState.conversation.status === 'closed';
+            send.disabled = opState.conversation.status === 'closed';
+        }
+    }
+});
+
+$('messageSearch')?.addEventListener('input', () => {
+    const q = ($('messageSearch').value || '').toLowerCase().trim();
+    document.querySelectorAll('#conversationList .conversation').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+});
 
 async function loadRequests(){
  const r=await opQuery('project_requests');opState.requests=r.data;$('reqTotal').textContent=r.data.length;$('reqOpen').textContent=r.data.filter(x=>!['approved','closed'].includes(String(x.status).toLowerCase())).length;$('reqWon').textContent=r.data.filter(x=>x.status==='approved').length;$('reqClosed').textContent=r.data.filter(x=>x.status==='closed').length;
