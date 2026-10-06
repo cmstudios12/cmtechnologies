@@ -2663,6 +2663,10 @@ function friendlySupabaseError(error, context = 'request') {
         return 'Supabase blocked this portfolio save with Row Level Security. The portfolio_projects table needs an authenticated admin INSERT policy.';
     }
 
+    if (error?.code === '23502' || lower.includes('not-null constraint') || lower.includes('not null constraint')) {
+        return `A required database field is missing. ${message}`;
+    }
+
     return message;
 }
 
@@ -3750,12 +3754,12 @@ $('projectForm').addEventListener('submit', async e => {
 
         const payload = {
             title: $('projectTitle').value.trim(),
-            category: $('projectCategory').value.trim() || null,
-            client: $('projectClient').value.trim() || null,
-            description: $('projectDescription').value.trim() || null,
-            project_url: $('projectUrl').value.trim() || null,
-            image_url,
-            image_path,
+            category: $('projectCategory').value.trim() || '',
+            client: $('projectClient').value.trim() || '',
+            description: $('projectDescription').value.trim() || '',
+            project_url: $('projectUrl').value.trim() || '',
+            image_url: image_url || '',
+            image_path: image_path || '',
             status: $('projectStatus').value,
             featured: $('projectFeatured').value === 'true'
         };
@@ -3850,10 +3854,10 @@ $('saveProjectEdit').addEventListener('click', async () => {
 
         const payload = {
             title: $('editProjectTitle').value.trim(),
-            category: $('editProjectCategory').value.trim() || null,
-            client: $('editProjectClient').value.trim() || null,
-            project_url: $('editProjectUrl').value.trim() || null,
-            description: $('editProjectDescription').value.trim() || null,
+            category: $('editProjectCategory').value.trim() || '',
+            client: $('editProjectClient').value.trim() || '',
+            project_url: $('editProjectUrl').value.trim() || '',
+            description: $('editProjectDescription').value.trim() || '',
             status: $('editProjectStatus').value,
             featured: $('editProjectFeatured').value === 'true'
         };
