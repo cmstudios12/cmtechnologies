@@ -2639,6 +2639,33 @@ const sb = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
+// Confirmed CMS resources used by this admin page.
+const PORTFOLIO_TABLE = 'portfolio_projects';
+const PORTFOLIO_BUCKET = 'portfolio';
+
+async function requireAuthenticatedUser() {
+    const { data: { user }, error } = await sb.auth.getUser();
+    if (error) throw error;
+    if (!user) {
+        throw new Error('Your admin session has expired. Please sign in again.');
+    }
+    return user;
+}
+
+function friendlySupabaseError(error, context = 'request') {
+    const message = error?.message || 'Something went wrong.';
+    const lower = message.toLowerCase();
+
+    if (error?.code === '42501' || lower.includes('row-level security') || lower.includes('row level security')) {
+        if (context === 'portfolio-image') {
+            return 'Supabase Storage blocked this image upload. The portfolio bucket needs an authenticated upload policy.';
+        }
+        return 'Supabase blocked this portfolio save with Row Level Security. The portfolio_projects table needs an authenticated admin INSERT policy.';
+    }
+
+    return message;
+}
+
 /* ================================================================
    HELPERS
 ================================================================ */
@@ -3434,7 +3461,7 @@ async function uploadImage(bucket, file, folder) {
             );
         }
 
-        throw error;
+        throw new Error(friendlySupabaseError(error, 'portfolio-image'));
     }
 
     const { data } =
@@ -3491,16 +3518,11 @@ async function loadProjects() {
     `;
 
     let query = sb
-        .from('portfolio_projects')
+        .from(PORTFOLIO_TABLE)
         .select('*')
         .order('created_at', { ascending: false });
 
     let result = await query;
-
-    /*
-       Some older databases may have a different table.
-       If your existing table is "projects", change the table name here.
-    */
 
     if (result.error) {
 
@@ -3702,6 +3724,9 @@ $('projectForm').addEventListener('submit', async e => {
 
     try {
 
+        // Never attempt a CMS write without a live authenticated Supabase user.
+        await requireAuthenticatedUser();
+
         const file =
             $('projectImage').files?.[0];
 
@@ -3712,7 +3737,7 @@ $('projectForm').addEventListener('submit', async e => {
 
             const uploaded =
                 await uploadImage(
-                    'portfolio',
+                    PORTFOLIO_BUCKET,
                     file,
                     'portfolio'
                 );
@@ -3737,14 +3762,14 @@ $('projectForm').addEventListener('submit', async e => {
 
         const { error } =
             await sb
-                .from('portfolio_projects')
+                .from(PORTFOLIO_TABLE)
                 .insert(payload);
 
         if (error) {
 
             if (uploadedPath) {
                 await deleteStorageFile(
-                    'portfolio',
+                    PORTFOLIO_BUCKET,
                     uploadedPath
                 );
             }
@@ -3768,7 +3793,7 @@ $('projectForm').addEventListener('submit', async e => {
 
         showToast(
             'Could not save project',
-            error.message || 'Something went wrong.',
+            friendlySupabaseError(error, 'portfolio-project'),
             'error'
         );
 
@@ -3835,7 +3860,7 @@ $('saveProjectEdit').addEventListener('click', async () => {
 
         const { error } =
             await sb
-                .from('portfolio_projects')
+                .from(PORTFOLIO_TABLE)
                 .update(payload)
                 .eq('id', currentProjectEdit.id);
 
@@ -3888,7 +3913,7 @@ async function toggleProject(id) {
 
     const { error } =
         await sb
-            .from('portfolio_projects')
+            .from(PORTFOLIO_TABLE)
             .update({
                 status: newStatus
             })
@@ -3930,7 +3955,7 @@ async function deleteProject(id) {
 
             const { error } =
                 await sb
-                    .from('portfolio_projects')
+                    .from(PORTFOLIO_TABLE)
                     .delete()
                     .eq('id', id);
 
